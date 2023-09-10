@@ -19,11 +19,26 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> add(@Valid @RequestBody User user) {
         User newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping(path = "/{userId}")
+    public User getUser(@PathVariable int userId) {
+        return userService.getUserByUserId(userId);
+    }
+
+    @PutMapping(path = "/{userId}")
+    public User updateUser(@PathVariable int userId, @RequestBody User userDetails) {
+        return userService.updateUser(userId, userDetails);
+    }
+
+    @DeleteMapping(path = "/{userId}")
+    public void deleteUser(@PathVariable int userId) {
+        userService.deleteUser(userId);
     }
 }

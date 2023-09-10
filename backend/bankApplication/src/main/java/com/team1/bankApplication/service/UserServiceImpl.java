@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,10 +25,32 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
-//
-//    @Override
-//    public User getUserById(int userId) {
-//        var user = userRepository.findById(userId);
-//
-//    }
+
+    @Override
+    public User getUserByUserId(int userId) {
+        return userRepository.findByUserId(userId);
+    }
+
+    @Override
+    public User updateUser(int userId, User userDetails) {
+        User user = userRepository.findByUserId(userId);
+        user.setFirstName(userDetails.getFirstName());
+        user.setMiddleName(userDetails.getMiddleName());
+        user.setLastName(userDetails.getLastName());
+        user.setFatherName(userDetails.getFatherName());
+        user.setEmail(userDetails.getEmail());
+        user.setDob(userDetails.getDob());
+        user.setMobile(userDetails.getMobile());
+        user.setAddress(userDetails.getAddress());
+        user.setPan(userDetails.getPan());
+
+        User updatedUser = userRepository.save(user);
+        return updatedUser;
+    }
+
+    @Override
+    public void deleteUser(int userId) {
+        User user = userRepository.findByUserId(userId);
+        userRepository.delete(user);
+    }
 }
