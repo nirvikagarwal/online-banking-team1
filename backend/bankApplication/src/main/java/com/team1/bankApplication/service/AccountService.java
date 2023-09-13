@@ -11,4 +11,5 @@ public interface AccountService {
     Account getAccount(long accountNo);
 
     List<Account> getAccounts();
+    List<Account> getAccountsByUserId(int userId);
 }
