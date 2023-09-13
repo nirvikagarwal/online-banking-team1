@@ -1,6 +1,8 @@
 package com.team1.bankApplication.controllers;
 
+import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.service.AccountService;
 import com.team1.bankApplication.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AccountService accountService;
+
     @PostMapping
     public ResponseEntity<User> add(@Valid @RequestBody User user) {
         User newUser = userService.addUser(user);
@@ -26,6 +31,11 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping(path = "/{userId}/accounts")
+    public List<Account> getAccountsOfUser(@PathVariable int userId) {
+        return accountService.getAccountsByUserId(userId);
     }
 
     @GetMapping(path = "/{userId}")

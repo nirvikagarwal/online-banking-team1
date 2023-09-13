@@ -52,4 +52,10 @@ public class AccountServiceImpl implements AccountService{
         List<Account> accounts = accountRepository.findAll();
         return accounts;
     }
+
+    @Override
+    public List<Account> getAccountsByUserId(int userId) {
+        List<Account> userAccounts = accountRepository.findByUserUserId(userId);
+        return userAccounts;
+    }
 }
