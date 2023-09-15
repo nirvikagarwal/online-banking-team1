@@ -1,5 +1,13 @@
+import "./HomePage.css"
+
 const HomePage = ()=>{
-    return <h1>HomePage</h1>
+    return(
+        <>
+        <div className="bg">
+            <p className="txt"><h1>Welcome to Premier Private Bank</h1></p>
+        </div>
+        </>
+    );
 }
 
 

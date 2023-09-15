@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../utils/apiHelper";
+import "./Table.css";
 
 const Table = () => {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,8 @@ const Table = () => {
   const temp = getUsers();
   console.log(temp);
   return (
-    <table className="table table-striped-columns">
+    <>
+    <table className="table table-striped-columns mt-3 border border-secondary">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -49,6 +51,8 @@ const Table = () => {
         })}
       </tbody>
     </table>
+    <div className="tablestyle"></div>
+    </>
   );
 };
 
