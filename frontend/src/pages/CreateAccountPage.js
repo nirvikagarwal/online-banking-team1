@@ -7,6 +7,7 @@ import {
   MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import { openAccount } from "../utils/apiHelper";
 
 const CreateAccount = () => {
   const [details, setDetails] = useState({
@@ -27,6 +28,7 @@ const CreateAccount = () => {
     if (details.aadhar.length !== 12) {
       alert("Aadhar number should contain 12 digits. Please enter again!");
     }
+    openAccount(details);
   };
   return (
     <MDBContainer

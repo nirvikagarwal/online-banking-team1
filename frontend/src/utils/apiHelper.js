@@ -23,4 +23,18 @@ const getUsers = async () => {
   }
 };
 
-export { registorUser, getUsers };
+const openAccount = async (account) => {
+  try {
+    const response = await axios.put(
+      "http://localhost:8080/api/accounts",
+      account
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { registorUser, getUsers, openAccount };
