@@ -4,6 +4,7 @@ import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
 import com.team1.bankApplication.service.AccountService;
 import com.team1.bankApplication.service.UserService;
+import com.team1.bankApplication.utils.PasswordEncoder;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
