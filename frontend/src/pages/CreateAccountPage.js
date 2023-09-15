@@ -11,10 +11,10 @@ import { openAccount } from "../utils/apiHelper";
 
 const CreateAccount = () => {
   const [details, setDetails] = useState({
-    account_type: "",
+    accountType: "",
     branch: "",
     aadhar: "",
-    annual_income: "",
+    annualIncome: "",
   });
 
   const handleOnChange = (e) => {
@@ -23,12 +23,23 @@ const CreateAccount = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(details);
+    //console.log(details);
     e.preventDefault();
     if (details.aadhar.length !== 12) {
       alert("Aadhar number should contain 12 digits. Please enter again!");
     }
-    openAccount(details);
+    else{
+      const response = openAccount({...details,userId:7,occupation:"buisness"});
+      if(response){
+        setDetails({
+          accountType: "",
+          branch: "",
+          aadhar: "",
+          annualIncome: "",
+        });
+
+      }
+    }
   };
   return (
     <MDBContainer
@@ -49,10 +60,10 @@ const CreateAccount = () => {
               required
               className="form-select"
               aria-label="Default select example"
-              name="account_type"
-              id="account_type"
+              name="accountType"
+              id="accountType"
               onChange={handleOnChange}
-              value={details.account_type}
+              value={details.accountType}
             >
               <option selected>Account Type</option>
               <option value="savings">Savings Account</option>
@@ -95,11 +106,11 @@ const CreateAccount = () => {
               wrapperClass="mb-4"
               label="Gross Annual Income"
               size="lg"
-              id="annual_income"
+              id="annualIncome"
               type="number"
-              name="annual_income"
+              name="annualIncome"
               onChange={handleOnChange}
-              value={details.annual_income}
+              value={details.annualIncome}
             />
             <div className="d-flex flex-row justify-content-center mb-4">
               <MDBCheckbox

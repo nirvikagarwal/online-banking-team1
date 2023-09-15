@@ -24,6 +24,7 @@ const getUsers = async () => {
 };
 
 const openAccount = async (account) => {
+  console.log(account);
   try {
     const response = await axios.put(
       "http://localhost:8080/api/accounts",
