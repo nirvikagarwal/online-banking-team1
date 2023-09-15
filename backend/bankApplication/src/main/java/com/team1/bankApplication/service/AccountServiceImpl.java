@@ -23,7 +23,7 @@ public class AccountServiceImpl implements AccountService{
     private UserRepository userRepository;
 
     @Override
-    public Account addAccount(AccountDto accountDto) {
+    public Account addAccount(AccountDto accountDto, User user) {
         Account account = new Account();
         BeanUtils.copyProperties(accountDto, account);
         account.setActive(true);
@@ -33,8 +33,7 @@ public class AccountServiceImpl implements AccountService{
 
         long randomAccountNumber = new Random().nextInt(0, Integer.MAX_VALUE);
         account.setAccountNo(randomAccountNumber);
-
-        User user = userRepository.findByUserId(accountDto.getUserId());
+        System.out.println(user);
         account.setUser(user);
 
         Account newAccount = accountRepository.save(account);

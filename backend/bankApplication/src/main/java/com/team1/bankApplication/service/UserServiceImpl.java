@@ -3,6 +3,7 @@ package com.team1.bankApplication.service;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
 import com.team1.bankApplication.repositories.UserRepository;
+import com.team1.bankApplication.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
+        user.setPassword(PasswordEncoder.generate(user.getPassword()));
         User newUser = userRepository.save(user);
         return newUser;
     }
@@ -51,5 +53,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(int userId) {
         User user = userRepository.findByUserId(userId);
         userRepository.delete(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = userRepository.findOneByEmail(email);
+        return user;
     }
 }

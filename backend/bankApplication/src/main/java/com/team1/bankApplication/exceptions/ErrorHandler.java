@@ -26,5 +26,12 @@ public class ErrorHandler {
         return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
 
     }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<String> handleMethodArgumentInvalid(Exception ex) {
+//
+//
+//        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+//
+//    }
 }
 

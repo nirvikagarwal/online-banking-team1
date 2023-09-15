@@ -55,4 +55,21 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                ", mobile='" + mobile + '\'' +
+                ", pan='" + pan + '\'' +
+                ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
