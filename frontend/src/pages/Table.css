@@ -1,8 +1,4 @@
-.tablestyle {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    height: 450px;
-  }
+.tab-cls{
+  background-color: blanchedalmond;
+  height: 100vh; 
+}

@@ -15,7 +15,7 @@ const Table = () => {
   console.log(temp);
   return (
     <>
-    <table className="table table-striped-columns mt-3 border border-secondary">
+    <table className="table table-striped-columns border border-secondary tab-cls">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -51,7 +51,6 @@ const Table = () => {
         })}
       </tbody>
     </table>
-    <div className="tablestyle"></div>
     </>
   );
 };
