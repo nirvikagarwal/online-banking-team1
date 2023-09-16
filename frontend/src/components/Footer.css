@@ -1,0 +1,39 @@
+.footer {
+    background-color: #dbd4d4;
+    color: black;
+    padding: 20px 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    margin: 0 20px;
+    flex: 1;
+}
+
+.footer-section h2 {
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+.email{
+    color: blue;
+    margin-bottom: 15px;
+}
+
+.email img{
+    width: 30px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 10px;
+}
