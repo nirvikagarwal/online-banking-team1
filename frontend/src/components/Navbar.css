@@ -1,0 +1,28 @@
+/* Navbar container */
+.navb {
+  background-color: #dbd4d4;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+/* Logo styles */
+.logo img {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  margin-left: 10px; /* Adjust the margin as needed for spacing */
+  border-radius: 3px;
+}
+
+/* On hover, change background color and text color */
+.hov:hover {
+  color: blueviolet;
+  text-decoration: solid;
+}
+
+.but {
+  background-color: beige;
+  outline: black;
+  text-decoration: black;
+}

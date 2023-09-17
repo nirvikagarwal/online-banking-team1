@@ -1,0 +1,56 @@
+.bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../assets/images/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.txt {
+  display: flex;
+  text-align: center;
+  color: orange;
+  height: 30vh;
+  font-weight: 400;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  align-items: center;
+  justify-content: center;
+}
+
+.subtxt {
+  margin-left: 130px;
+  margin-right: 130px;
+  text-align: center;
+  color: rgb(0, 255, 0);
+  font-weight: 400;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  /* justify-content: center; */
+}
+
+.feat {
+  margin-left: 100px;
+  margin-top: 60px;
+  color: rgb(249, 249, 250);
+  font-weight: 400;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  margin-bottom: 15px;
+}
+
+.featcls {
+  margin-left: 100px;
+  color: rgb(249, 249, 250);
+  font-weight: 400;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.featcls img {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
