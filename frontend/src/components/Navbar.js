@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          Navbar
+          Bank Name
         </Link>
         <button
           className="navbar-toggler"
@@ -43,6 +43,11 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link active" to="/createAccount">
                 Open Account
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/netBanking">
+                Net Banking
               </Link>
             </li>
             {/* <li className="nav-item dropdown">

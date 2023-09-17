@@ -13,6 +13,10 @@ import {
   CreatAccountPage,
 } from "../pages";
 import UserTable from "../pages/Table";
+import FundTransfer from "../pages/FundTransfer";
+import AddBeneficiary from "../pages/AddBeneficiary";
+import ManageBeneficiary from "../pages/ManageBeneficiary";
+import Transactions from "../pages/Transactions";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +64,22 @@ const router = createBrowserRouter([
       {
         path: "/userTable",
         element: <UserTable />,
+      },
+      {
+        path: "/fundTransfer",
+        element: <FundTransfer />,
+      },
+      {
+        path: "/addBeneficiary",
+        element: <AddBeneficiary />,
+      },
+      {
+        path: "/manageBeneficiary",
+        element: <ManageBeneficiary />,
+      },
+      {
+        path: "/transactions",
+        element: <Transactions />,
       },
     ],
   },
