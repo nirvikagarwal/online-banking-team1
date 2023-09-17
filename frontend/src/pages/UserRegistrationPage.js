@@ -72,11 +72,8 @@ const Form = () => {
       >
         <MDBCard className="m-5" style={{ width: "45%" }}>
           <MDBCardBody className="px-5">
-            <h2
-              className="text-uppercase text-center mb-5"
-              style={{ fontSize: "20px" }}
-            >
-              User details
+            <h2 className=" text-center mb-5" style={{ fontSize: "20px" }}>
+              Register Your Account
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
