@@ -52,4 +52,8 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "user", referencedColumnName = "userId")
     private User user;
+
+    private boolean netBankingEnabled = false;
+
+    private String transactionPassword = null;
 }
