@@ -1,11 +1,12 @@
 import "./HomePage.css";
+import "bootstrap"
 import hand from "../assets/images/hand.png";
 
 const HomePage = () => {
   return (
     <>
       <div className="bg">
-        <h1 className="txt display-1">Welcome to Premier Private Bank</h1>
+        <h1 className="display-1 txt">Welcome to Premier Private Bank</h1>
         <h4 className="subtxt">
           At Premier Private Bank, we are committed to empowering individuals
           and businesses with financial solutions that drive growth and
