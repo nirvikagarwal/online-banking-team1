@@ -1,12 +1,16 @@
 package com.team1.bankApplication.service;
 
+import com.team1.bankApplication.dtos.AccountDetailsResponseDto;
 import com.team1.bankApplication.dtos.AccountDto;
+import com.team1.bankApplication.dtos.NetBankingDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
 import com.team1.bankApplication.repositories.AccountRepository;
 import com.team1.bankApplication.repositories.UserRepository;
+import com.team1.bankApplication.utils.PasswordEncoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -55,5 +59,12 @@ public class AccountServiceImpl implements AccountService{
     public List<Account> getAccountsByUserId(int userId) {
         List<Account> userAccounts = accountRepository.findByUserUserId(userId);
         return userAccounts;
+    }
+
+    @Override
+    public void registerNetBanking(Account account, NetBankingDto netBankingDto) {
+        account.setNetBankingEnabled(true);
+        account.setTransactionPassword(PasswordEncoder.generate(netBankingDto.getTransactionPassword()));
+        accountRepository.save(account);
     }
 }
