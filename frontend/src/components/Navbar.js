@@ -49,7 +49,7 @@ const Navbar = () => {
               Login
             </NavLink>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink
               style={navLinkStyle}
               className="nav-link hov"
@@ -58,7 +58,7 @@ const Navbar = () => {
             >
               user table
             </NavLink>
-          </li>
+          </li> */}
           <li className="nav-item">
             <NavLink
               style={navLinkStyle}
@@ -67,6 +67,15 @@ const Navbar = () => {
               activeClassName="active"
             >
               Open Account
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              style={navLinkStyle}
+              className="nav-link hov"
+              to="/netBanking"
+              activeClassName="active">
+              Net Banking
             </NavLink>
           </li>
         </ul>
