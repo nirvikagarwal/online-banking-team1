@@ -13,7 +13,10 @@ const registorUser = async (user) => {
 
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/users");
+    const response = await axios.get("http://localhost:8080/api/users",{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }});
     const data = response.data;
     console.log(data);
     return data;
@@ -27,7 +30,10 @@ const openAccount = async (account) => {
   try {
     const response = await axios.post(
       "http://localhost:8080/api/accounts",
-      account
+      account,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }}
     );
     console.log(response.data);
     return response.data;

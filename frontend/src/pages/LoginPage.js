@@ -20,11 +20,12 @@ const LoginPage = () => {
     setDetails({ ...details, [name]: value });
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     console.log(details);
     setIsLoading(true);
-    const response = login(details);
+    const response =await login(details);
+    console.log(response);
     if (response) {
       setDetails({
         email: "",
