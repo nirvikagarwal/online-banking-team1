@@ -36,7 +36,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String jwtToken = getTokenFromRequest(request);
-        System.out.println(jwtToken);
 
         if (StringUtils.hasText(jwtToken) && jwtTokenProvider.validateToken(jwtToken)) {
             String username = jwtTokenProvider.getUsername(jwtToken);
