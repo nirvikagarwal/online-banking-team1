@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Login from "../assets/images/Login.png";
+import Login from "../assets/images/login.png";
 import { login } from "../utils/apiHelper";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+
+  const navigate = useNavigate();
+
   const [details, setDetails] = useState({
     email: "",
     password: "",
   });
+
+  const [loading,setIsLoading] = useState(false);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -17,14 +23,17 @@ const LoginPage = () => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log(details);
-
+    setIsLoading(true);
     const response = login(details);
     if (response) {
       setDetails({
         email: "",
         password: "",
       });
+      localStorage.setItem("token",response.accessToken);
+      navigate('/user');
     }
+    setIsLoading(false);
   };
 
   return (
@@ -73,13 +82,18 @@ const LoginPage = () => {
                       </div>
                       <div className="col-6"></div>
                     </div>
-                    <div className="">
+                    {
+                      loading?<button className="btn btn-primary mt-3" type="button" disabled>
+                      <span className="spinner-grow spinner-grow-sm me-2" aria-hidden="true"></span>
+                      <span role="status">Logging in   </span>
+                    </button>
+                    :<div className="">
                       <input
                         type="submit"
                         className="form-control btn btn-primary mt-3"
                         onClick={handleClick}
                       />
-                    </div>
+                    </div>}
                   </form>
                 </div>
                 <div className="col-md-6">
