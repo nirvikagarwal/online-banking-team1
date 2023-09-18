@@ -1,6 +1,7 @@
 /* Navbar container */
 .navb {
-  background-color: #18fbec;
+  background-color: #dbd4d4;
+
   overflow: hidden;
   display: flex;
   justify-content: space-between; /* Align items horizontally */

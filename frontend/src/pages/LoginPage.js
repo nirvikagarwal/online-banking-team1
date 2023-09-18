@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import login from "../assets/images/login.png";
+import Login from "../assets/images/Login.png";
+import { login } from "../utils/apiHelper";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [details, setDetails] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setDetails({ ...details, [name]: value });
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(details);
+
+    const response = login(details);
+    if (response) {
+      setDetails({
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
@@ -23,15 +40,16 @@ const LoginPage = () => {
                   </div>
                   <form className="m-5">
                     <div className="mb-3">
-                      <label className="form-label" htmlFor="username">
-                        Username
+                      <label className="form-label" htmlFor="email">
+                        Email
                       </label>
                       <input
                         className="form-control"
                         type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        id="email"
+                        name="email"
+                        value={details.email}
+                        onChange={handleOnChange}
                       />
                     </div>
                     <div className="mb-3">
@@ -42,8 +60,9 @@ const LoginPage = () => {
                         className="form-control"
                         type="password"
                         id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
+                        value={details.password}
+                        onChange={handleOnChange}
                       />
                     </div>
                     <div className="row mb-3">
@@ -65,7 +84,7 @@ const LoginPage = () => {
                 </div>
                 <div className="col-md-6">
                   <div>
-                    <img src={login} alt="login" className="img-fluid p-5" />
+                    <img src={Login} alt="Login" className="img-fluid p-5" />
                   </div>
                 </div>
               </div>

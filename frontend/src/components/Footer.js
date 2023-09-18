@@ -10,22 +10,22 @@ function Footer() {
         <div className="footer-content">
           <div className="footer-section about">
             <h2>About Us</h2>
-            <p>
+            <div>
               The best banking service provider. One place for all your banking
               essentials.
-            </p>
+            </div>
           </div>
 
           <div className="footer-section contact">
             <h2 className="mb-2">Contact Us</h2>
-            <h5 className="email">
+            <h6 className="email">
               <img src={Email} alt="#" />
               premierbank@gmail.com
-            </h5>
-            <h5 className="email">
+            </h6>
+            <h6 className="email">
               <img src={contact} alt="#" />
               +91 6299674639
-            </h5>
+            </h6>
           </div>
           <div className="footer-bottom">
             <h6>

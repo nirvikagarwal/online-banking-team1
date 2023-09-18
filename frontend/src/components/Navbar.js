@@ -69,6 +69,16 @@ const Navbar = () => {
               Open Account
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              style={navLinkStyle}
+              className="nav-link hov"
+              to="/netBanking"
+              activeClassName="active"
+            >
+              Net Banking
+            </NavLink>
+          </li>
         </ul>
         <form className="d-flex">
           <input

@@ -166,7 +166,7 @@ const Form = () => {
                   <MDBInput
                     {...register("mobile", { required: true })}
                     wrapperClass="mb-4"
-                    label="mobile"
+                    label="Mobile"
                     size="lg"
                     id="mobile"
                     type="text"
