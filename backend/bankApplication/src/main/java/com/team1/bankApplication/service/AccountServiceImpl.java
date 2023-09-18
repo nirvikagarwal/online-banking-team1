@@ -33,7 +33,6 @@ public class AccountServiceImpl implements AccountService{
 
         long randomAccountNumber = new Random().nextInt(0, Integer.MAX_VALUE);
         account.setAccountNo(randomAccountNumber);
-        System.out.println(user);
         account.setUser(user);
 
         Account newAccount = accountRepository.save(account);
