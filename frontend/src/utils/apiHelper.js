@@ -25,7 +25,7 @@ const getUsers = async () => {
 
 const openAccount = async (account) => {
   try {
-    const response = await axios.put(
+    const response = await axios.post(
       "http://localhost:8080/api/accounts",
       account
     );
@@ -37,4 +37,18 @@ const openAccount = async (account) => {
   }
 };
 
-export { registorUser, getUsers, openAccount };
+const login = async (loginDetails) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/auth/login",
+      loginDetails
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { registorUser, getUsers, openAccount, login };

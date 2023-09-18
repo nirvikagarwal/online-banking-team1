@@ -1,9 +1,10 @@
 package com.team1.bankApplication.service;
 
+import com.team1.bankApplication.dtos.AccountDetailsResponseDto;
 import com.team1.bankApplication.dtos.AccountDto;
+import com.team1.bankApplication.dtos.NetBankingDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface AccountService {
 
     List<Account> getAccounts();
     List<Account> getAccountsByUserId(int userId);
+
+    void registerNetBanking(Account account, NetBankingDto netBankingDto);
 }
