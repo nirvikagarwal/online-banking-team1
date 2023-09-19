@@ -59,4 +59,18 @@ const login = async (loginDetails) => {
   }
 };
 
-export { registorUser, getUsers, openAccount, login };
+const addBeneficiary = async (details) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/beneficiary",
+      details
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { registorUser, getUsers, openAccount, login, addBeneficiary };

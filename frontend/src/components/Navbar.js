@@ -4,10 +4,11 @@ import "./Navbar.css";
 
 const navLinkStyle = {
   color: "black", // Change link color
+  // backgroundColor: "black",
   textDecoration: "none", // Remove underline
   padding: "10px 20px", // Add padding
   borderRadius: "5px", // Add rounded corners
-  transition: "background-color 0.2s ease",
+  // // transition: "background-color 0.2s ease",
 };
 
 const Navbar = () => {
@@ -17,8 +18,11 @@ const Navbar = () => {
         <img src={Logo} alt="#" />
       </div>
       <div className="container-fluid">
-        <ul className="nav nav-tabs navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
+        <ul
+          className="nav nav-tabs navbar-nav me-auto mb-2 mb-lg-0"
+          style={{ textDecoration: "none" }}
+        >
+          <li className="nav-item hov">
             <NavLink
               style={navLinkStyle}
               className="nav-link hov"

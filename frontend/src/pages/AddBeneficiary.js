@@ -8,18 +8,25 @@ import {
   MDBCardBody,
   MDBInput,
 } from "mdb-react-ui-kit";
+import { addBeneficiary } from "../utils/apiHelper";
+import BeneficiaryModal from "../components/BeneficiaryModal";
 
 const AddBeneficiary = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [details, setDetails] = useState({
-    name: "",
+    beneficiaryName: "",
     accountNo: "",
-    ifscCode: "",
-    password: "",
+    bankName: "",
+    ifsc: "",
   });
 
   const handleOnChange = (e) => {
@@ -27,13 +34,25 @@ const AddBeneficiary = () => {
     setDetails({ ...details, [name]: value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     console.log(details);
-    e.preventDefault();
+    // e.preventDefault();
+    const response = await addBeneficiary(details);
+    console.log(response);
+    if (response) {
+      setShow(true);
+      setDetails({
+        beneficiaryName: "",
+        accountNo: "",
+        bankName: "",
+        ifsc: "",
+      });
+    }
   };
 
   return (
     <>
+      <BeneficiaryModal show={show} handleClose={handleClose} />
       <MDBContainer
         fluid
         className="d-flex align-items-center justify-content-center "
@@ -50,16 +69,17 @@ const AddBeneficiary = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <MDBInput
                 wrapperClass="mb-4"
-                label="Name"
+                label="Beneficiary Name"
                 size="lg"
-                id="name"
+                id="beneficiaryName"
+                name="beneficiaryName"
                 type="text"
-                {...register("name", { required: true })}
+                {...register("beneficiaryName", { required: true })}
                 onChange={handleOnChange}
-                value={details.name}
+                value={details.beneficiaryName}
               />
 
-              {errors.firstName?.type === "required" && (
+              {errors.beneficiaryName?.type === "required" && (
                 <p role="alert">Name is required</p>
               )}
 
@@ -68,6 +88,7 @@ const AddBeneficiary = () => {
                 label="Account Number"
                 size="lg"
                 id="accountNo"
+                name="accountNo"
                 {...register("accountNo", { required: true })}
                 type="text"
                 onChange={handleOnChange}
@@ -76,27 +97,42 @@ const AddBeneficiary = () => {
               {errors.accountNo?.type === "required" && (
                 <p role="alert">Account number is required</p>
               )}
+
               <MDBInput
-                {...register("email", { required: true })}
+                {...register("bankName", { required: true })}
                 wrapperClass="mb-4"
-                label="IFSC Code"
+                label="Bank Name"
                 size="lg"
-                id="ifscCode"
-                type="ifscCode"
+                id="bankName"
+                type="bankName"
                 onChange={handleOnChange}
-                value={details.ifscCode}
+                value={details.bankName}
               />
-              {errors.ifscCode?.type === "required" && (
+              {errors.bankName?.type === "required" && (
                 <p role="alert">IFSC Code is required</p>
               )}
 
               <MDBInput
+                {...register("ifsc", { required: true })}
+                wrapperClass="mb-4"
+                label="IFSC Code"
+                size="lg"
+                id="ifsc"
+                type="ifsc"
+                onChange={handleOnChange}
+                value={details.ifsc}
+              />
+              {errors.ifsc?.type === "required" && (
+                <p role="alert">IFSC Code is required</p>
+              )}
+
+              {/* <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
                 size="lg"
                 id="password"
                 type="password"
-                {...register("password", {
+                {...add("password", {
                   required: true,
                   pattern:
                     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
@@ -119,7 +155,7 @@ const AddBeneficiary = () => {
                     </ul>
                   </p>
                 </>
-              )}
+              )} */}
 
               <MDBBtn
                 className="mb-4 w-100 gradient-custom-3"
