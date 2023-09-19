@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Login from "../assets/images/login.png";
+import Login from "../assets/images/Login.png";
 import { login } from "../utils/apiHelper";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -13,7 +12,7 @@ const LoginPage = () => {
     password: "",
   });
 
-  const [loading,setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -24,15 +23,15 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(details);
     setIsLoading(true);
-    const response =await login(details);
+    const response = await login(details);
     console.log(response);
     if (response) {
       setDetails({
         email: "",
         password: "",
       });
-      localStorage.setItem("token",response.accessToken);
-      navigate('/user');
+      localStorage.setItem("token", response.accessToken);
+      navigate("/user");
     }
     setIsLoading(false);
   };
@@ -83,18 +82,27 @@ const LoginPage = () => {
                       </div>
                       <div className="col-6"></div>
                     </div>
-                    {
-                      loading?<button className="btn btn-primary mt-3" type="button" disabled>
-                      <span className="spinner-grow spinner-grow-sm me-2" aria-hidden="true"></span>
-                      <span role="status">Logging in   </span>
-                    </button>
-                    :<div className="">
-                      <input
-                        type="submit"
-                        className="form-control btn btn-primary mt-3"
-                        onClick={handleClick}
-                      />
-                    </div>}
+                    {loading ? (
+                      <button
+                        className="btn btn-primary mt-3"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-grow spinner-grow-sm me-2"
+                          aria-hidden="true"
+                        ></span>
+                        <span role="status">Logging in </span>
+                      </button>
+                    ) : (
+                      <div className="">
+                        <input
+                          type="submit"
+                          className="form-control btn btn-primary mt-3"
+                          onClick={handleClick}
+                        />
+                      </div>
+                    )}
                   </form>
                 </div>
                 <div className="col-md-6">
