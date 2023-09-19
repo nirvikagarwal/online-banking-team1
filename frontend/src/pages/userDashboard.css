@@ -1,0 +1,19 @@
+.sidebar {
+    background-color: #f8f9fa; /* Sidebar background color */
+  }
+  
+  .sidebar a {
+    color: #343a40; /* Sidebar link text color */
+  }
+  
+  .sidebar a:hover {
+    background-color: #e2e6ea; /* Sidebar link hover background color */
+  }
+  
+  .sidebar .navbar-toggler-icon {
+    background-color: #343a40; /* Sidebar toggle icon color */
+  }
+  
+  .sidebar .navbar-toggler:focus {
+    outline: none; /* Remove focus outline from sidebar toggle button */
+  }

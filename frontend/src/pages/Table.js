@@ -35,7 +35,7 @@ const Table = () => {
         {users.map((user, index) => {
           return (
             <tr key={index}>
-              <th scope="row">index+1</th>
+              <th scope="row">{index+1}</th>
               <td>{user.userId}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
