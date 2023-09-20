@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/images/Logo.jpg";
+import Logo from "../assets/images/bank-logo.png";
 import "./Navbar.css";
 
 const navLinkStyle = {
   color: "black", // Change link color
   // backgroundColor: "black",
-  textDecoration: "none", // Remove underline
+  textDecoration: "none !important", // Remove underline
   padding: "10px 20px", // Add padding
   borderRadius: "5px", // Add rounded corners
-  // // transition: "background-color 0.2s ease",
+  transition: "background-color 0.2s ease",
 };
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="logo">
         <img src={Logo} alt="#" />
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{ textDecoration: "none" }}>
         <ul
           className="nav nav-tabs navbar-nav me-auto mb-2 mb-lg-0"
           style={{ textDecoration: "none" }}
@@ -83,6 +83,16 @@ const Navbar = () => {
               Net Banking
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              style={navLinkStyle}
+              className="nav-link hov"
+              to="/activateNetBanking"
+              activeClassName="active"
+            >
+              Activate Net Banking
+            </NavLink>
+          </li>
         </ul>
         <form className="d-flex">
           <input
@@ -91,7 +101,7 @@ const Navbar = () => {
             placeholder="Search"
             aria-label="Search"
           />
-          <button className="btn btn-outline-success but" type="submit">
+          <button className="btn btn-outline-primary but" type="submit">
             Search
           </button>
         </form>

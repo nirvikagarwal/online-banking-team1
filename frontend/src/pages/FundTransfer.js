@@ -65,7 +65,6 @@ const FundTransfer = () => {
     }
     if (response) {
       setShow(true);
-
       setDetails({
         type: "",
         amount: "",
@@ -116,7 +115,8 @@ const FundTransfer = () => {
                 label="Amount"
                 size="lg"
                 id="amount"
-                type="amount"
+                type="number"
+                name="amount"
                 onChange={handleOnChange}
                 value={details.amount}
               />
@@ -160,6 +160,7 @@ const FundTransfer = () => {
                 label="Transaction Password"
                 size="lg"
                 id="transactionPassword"
+                name="transactionPassword"
                 type="password"
                 {...register("transactionPassword", {
                   required: true,

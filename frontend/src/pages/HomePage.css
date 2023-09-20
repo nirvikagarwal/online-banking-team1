@@ -1,14 +1,15 @@
 .bg {
   position: relative;
   width: 100%;
-  height: 135vh;
-  background-image: url("../assets/images/bg-image-hourglass.jpg");
-  background-size: cover;
+  height: 75vh;
+  background-image: url("../assets/images/online-banking-image.png");
+  /* background-position: right; */
+  /* background-size: 500px; */
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.txt {
+/* .txt {
   display: flex;
   text-align: left;
   color: black;
@@ -53,4 +54,4 @@
   width: 30px;
   height: auto;
   margin-right: 10px;
-}
+} */

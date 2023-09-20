@@ -46,7 +46,10 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer className="footer mt-5 py-3 bg-light">
+    <footer
+      className="footer mt-5 py-3 "
+      style={{ backgroundColor: "#A1B7F3", paddingTop: "2rem" }}
+    >
       <Container>
         <Row>
           <Col md={4}>
