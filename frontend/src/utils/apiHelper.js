@@ -1,4 +1,5 @@
 import axios from "axios";
+import {GetUserContext} from "../context/UserContext"
 
 const registorUser = async (user) => {
   try {
@@ -52,6 +53,13 @@ const login = async (loginDetails) => {
       loginDetails
     );
     console.log(response.data);
+    const user = await axios.get("http://localhost:8080/api/users/getDetails",{
+      headers :{
+        Authorization : `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    const {setUser} = GetUserContext();
+    setUser(user);
     return response.data;
   } catch (err) {
     console.log(err);

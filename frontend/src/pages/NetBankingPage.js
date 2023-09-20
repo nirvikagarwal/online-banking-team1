@@ -10,7 +10,7 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Fund Transfer</h5>
-              <p className="card-text">Transfer money to another account.</p>
+              <p className="card-text text-reset">Transfer money to another account.</p>
               <a href="#" className="btn btn-outline-light">
                 Go to Fund Transfer
               </a>
@@ -23,7 +23,7 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Add Beneficiary</h5>
-              <p className="card-text">
+              <p className="card-text text-reset">
                 Add a new beneficiary for easy transfers.
               </p>
               <a href="#" className="btn btn-outline-light">
@@ -38,7 +38,7 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Manage Beneficiary</h5>
-              <p className="card-text">View and manage your beneficiaries.</p>
+              <p className="card-text text-reset">View and manage your beneficiaries.</p>
               <a href="#" className="btn btn-outline-light">
                 Go to Manage Beneficiary
               </a>
@@ -52,7 +52,7 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Manage Beneficiary</h5>
-              <p className="card-text">View and manage your beneficiaries.</p>
+              <p className="card-text text-reset">View and manage your beneficiaries.</p>
               <a href="#" className="btn btn-outline-light">
                 Go to Manage Beneficiary
               </a>
