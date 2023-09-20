@@ -73,4 +73,18 @@ const addBeneficiary = async (details) => {
   }
 };
 
-export { registorUser, getUsers, openAccount, login, addBeneficiary };
+const fundTransfer = async (details) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/transactions",
+      details
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { registorUser, getUsers, openAccount, login, addBeneficiary, fundTransfer };

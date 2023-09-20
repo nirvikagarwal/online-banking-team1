@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Login from "../assets/images/Login.png";
+import Login from "../assets/images/login.png";
 import { login } from "../utils/apiHelper";
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +18,7 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setDetails({ ...details, [name]: value });
   };
+  
 
   const handleClick = async (e) => {
     e.preventDefault();
