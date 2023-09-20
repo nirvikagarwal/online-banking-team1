@@ -1,6 +1,6 @@
 /* Navbar container */
 .navb {
-  background-color: #18fbec;
+  background-color: #f8f9fa;
 
   overflow: hidden;
   display: flex;
@@ -18,7 +18,7 @@
 
 /* On hover, change background color and text color */
 .hov:hover {
-  color: blueviolet;
+  color: black;
   text-decoration: solid;
 }
 
