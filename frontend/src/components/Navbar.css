@@ -1,29 +1,22 @@
 /* Navbar container */
 .navb {
-  background-color: #f8f9fa;
-
+  background-color: #a1b7f3;
   overflow: hidden;
   display: flex;
   justify-content: space-between; /* Align items horizontally */
   align-items: center; /* Align items vertically */
 }
 
+.nav-tabs {
+  font-size: 13px;
+}
+.nav-item {
+  text-decoration: none;
+}
 /* Logo styles */
 .logo img {
-  width: 50px; /* Adjust the width as needed */
+  width: 40px; /* Adjust the width as needed */
   height: auto;
   margin-left: 10px; /* Adjust the margin as needed for spacing */
   border-radius: 3px;
-}
-
-/* On hover, change background color and text color */
-.hov:hover {
-  color: black;
-  text-decoration: solid;
-}
-
-.but {
-  background-color: beige;
-  outline: black;
-  text-decoration: black;
 }

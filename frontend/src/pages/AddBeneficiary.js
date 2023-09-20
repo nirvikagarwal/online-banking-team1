@@ -22,6 +22,7 @@ const AddBeneficiary = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [details, setDetails] = useState({
     beneficiaryName: "",
     accountNo: "",
