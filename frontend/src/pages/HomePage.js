@@ -1,16 +1,17 @@
 import "./HomePage.css";
+import "bootstrap";
 import hand from "../assets/images/hand.png";
 
 const HomePage = () => {
   return (
     <>
       <div className="bg">
-        <h1 className="txt display-1">Welcome to Premier Private Bank</h1>
-        <h5 className="subtxt">
+        {/* <h1 className="display-1 txt">Welcome to Premier Private Bank</h1>
+        <h4 className="subtxt">
           At Premier Private Bank, we are committed to empowering individuals
           and businesses with financial solutions that drive growth and
           prosperity in our communities.
-        </h5>
+        </h4>
         <h1 className="feat">Featured Services :</h1>
         <h5 className="featcls">
           <img src={hand} alt="#" />
@@ -26,7 +27,7 @@ const HomePage = () => {
           <img src={hand} alt="#" />
           Experience seamless and secure online transactions with our internet
           banking platform.
-        </h5>
+        </h5> */}
       </div>
     </>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const RegisterModal = ({ show, handleClose }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate("/login");
   };
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -18,7 +18,7 @@ const RegisterModal = ({ show, handleClose }) => {
           Close
         </Button>
         <Button variant="primary" onClick={handleClick}>
-          Explore More
+          login
         </Button>
       </Modal.Footer>
     </Modal>

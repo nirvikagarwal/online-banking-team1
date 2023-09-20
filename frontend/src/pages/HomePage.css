@@ -1,8 +1,8 @@
 .bg {
   position: relative;
   width: 100%;
-  height: 100vh;
-  background-image: url("../assets/images/bg.png");
+  height: 135vh;
+  background-image: url("../assets/images/bg-image-hourglass.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -10,25 +10,23 @@
 
 .txt {
   display: flex;
-  text-align: center;
-  color: orange;
-  height: 30vh;
+  text-align: left;
+  color: black;
+  height: 35vh;
   font-weight: 400;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 85px;
 }
 
 .subtxt {
-  margin-left: 130px;
-  margin-right: 130px;
+  margin-left: 138px;
+  margin-right: 138px;
   text-align: center;
-  color: whitesmoke;
+  color: rgb(0, 255, 8);
   font-weight: 500;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
-  font-size: large;
-  /* justify-content: center; */
 }
 
 .feat {
