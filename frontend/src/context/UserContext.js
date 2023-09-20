@@ -1,15 +1,31 @@
-import React,{useState,useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { getCurrentUser, getAccount } from "../utils/apiHelper";
 
 const UserContext = React.createContext(null);
 
-const UserContextProvider = ({children}) =>{
-    const [user,setUser] = useState({});
+const UserContextProvider = ({ children }) => {
+  const [user, setUser] = useState();
 
-    return <UserContext.Provider value={{user,setUser}}>{children}</UserContext.Provider>
-}
+  useEffect(() => {
+    const func = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const user = await getCurrentUser();
+        setUser(user.data);
+      }
+    };
+    func();
+  }, []);
 
-export const GetUserContext = () =>{
-    return useContext(UserContext);
-}
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const GetUserContext = () => {
+  return useContext(UserContext);
+};
 
 export default UserContextProvider;

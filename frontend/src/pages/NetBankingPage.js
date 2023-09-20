@@ -10,10 +10,12 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Fund Transfer</h5>
-              <p className="card-text text-reset">Transfer money to another account.</p>
-              <a href="#" className="btn btn-outline-light">
+              <p className="card-text text-reset">
+                Transfer money to another account.
+              </p>
+              <Link to="/fundTransfer" className="btn btn-outline-light">
                 Go to Fund Transfer
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -26,9 +28,9 @@ const NetBankingPage = () => {
               <p className="card-text text-reset">
                 Add a new beneficiary for easy transfers.
               </p>
-              <a href="#" className="btn btn-outline-light">
+              <Link to="/addBeneficiary" className="btn btn-outline-light">
                 Go to Add Beneficiary
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -38,10 +40,12 @@ const NetBankingPage = () => {
           <div className="card mb-4 card1">
             <div className="card-body">
               <h5 className="card-title">Manage Beneficiary</h5>
-              <p className="card-text text-reset">View and manage your beneficiaries.</p>
-              <a href="#" className="btn btn-outline-light">
+              <p className="card-text text-reset">
+                View and manage your beneficiaries.
+              </p>
+              <Link to="manageBeneficiary" className="btn btn-outline-light">
                 Go to Manage Beneficiary
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -51,11 +55,11 @@ const NetBankingPage = () => {
           {/* Manage Beneficiary Service */}
           <div className="card mb-4 card1">
             <div className="card-body">
-              <h5 className="card-title">Manage Beneficiary</h5>
-              <p className="card-text text-reset">View and manage your beneficiaries.</p>
-              <a href="#" className="btn btn-outline-light">
-                Go to Manage Beneficiary
-              </a>
+              <h5 className="card-title">Transactions</h5>
+              <p className="card-text text-reset">View transactions history</p>
+              <Link to="/transactions" className="btn btn-outline-light">
+                Go to transactions
+              </Link>
             </div>
           </div>
         </div>
