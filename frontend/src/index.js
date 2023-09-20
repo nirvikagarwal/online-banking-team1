@@ -9,11 +9,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {RouterProvider} from "react-router-dom";
 import router from "./utils/router"
+import UserContextProvider from "./context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <UserContextProvider>
     <RouterProvider router={router}><App /></RouterProvider>
+    </UserContextProvider>
+    
     
   </React.StrictMode>
 );

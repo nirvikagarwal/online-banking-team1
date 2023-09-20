@@ -52,6 +52,7 @@ const login = async (loginDetails) => {
       loginDetails
     );
     console.log(response.data);
+    localStorage.setItem("token", response.data.accessToken);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -63,13 +64,17 @@ const addBeneficiary = async (details) => {
   try {
     const response = await axios.post(
       "http://localhost:8080/api/beneficiary",
-      details
+      details,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     console.log(response.data);
     return response.data;
   } catch (err) {
     console.log(err);
-    return [];
   }
 };
 
@@ -77,14 +82,71 @@ const fundTransfer = async (details) => {
   try {
     const response = await axios.post(
       "http://localhost:8080/api/transactions",
-      details
+      details,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     console.log(response.data);
     return response.data;
   } catch (err) {
     console.log(err);
-    return [];
   }
 };
 
-export { registorUser, getUsers, openAccount, login, addBeneficiary, fundTransfer };
+const getCurrentUser = async () => {
+  const user = await axios.get("http://localhost:8080/api/users/getDetails", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  return user;
+};
+
+const getAccount = async (userId) => {
+  try {
+    const account = await axios.get(
+      `http://localhost:8080/api/users/${userId}/accounts`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return account.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const activateNetBanking = async (details) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/accounts/register",
+      details,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  registorUser,
+  getUsers,
+  openAccount,
+  login,
+  addBeneficiary,
+  fundTransfer,
+  getCurrentUser,
+  getAccount,
+  activateNetBanking,
+};

@@ -7,14 +7,24 @@ import {
   MDBCardBody,
   MDBInput,
 } from "mdb-react-ui-kit";
-import { fundTransfer } from "../utils/apiHelper";
+import { fundTransfer, getAccount } from "../utils/apiHelper";
 import FundTransferModal from "../components/FundTransferModal";
+import ActivateNetBankingModal from "../components/ActivateNetBankingModal";
+import { GetUserContext } from "../context/UserContext";
 
 const FundTransfer = () => {
   const [show, setShow] = useState(false);
+  const [netShow, setNetShow] = useState(false);
+
   const handleClose = () => {
     setShow(false);
   };
+
+  const handleNetClose = () => {
+    setNetShow(false);
+  };
+
+  const { user } = GetUserContext();
 
   const {
     register,
@@ -23,11 +33,11 @@ const FundTransfer = () => {
   } = useForm();
 
   const [details, setDetails] = useState({
-    type:"",
-    amount:"",
-    beneficiaryAccountNo:"",
-    userAccountNo:"",
-    transactionPassword:""
+    type: "",
+    amount: "",
+    beneficiaryAccountNo: "",
+    userAccountNo: "",
+    transactionPassword: "",
   });
 
   const handleOnChange = (e) => {
@@ -38,17 +48,30 @@ const FundTransfer = () => {
   const onSubmit = async (e) => {
     console.log(details);
     // e.preventDefault();
-    const response = await fundTransfer(details);
-    console.log(response);
+    const accounts = await getAccount(user.userId);
+    console.log(accounts);
+    const valid = accounts.find(
+      (account) => `${account.accountNo}` === details.userAccountNo
+    );
+    console.log(valid);
+    let response = null;
+    if (valid) {
+      if (valid.netBankingEnabled) {
+        response = await fundTransfer(details);
+        console.log(response);
+      } else {
+        setNetShow(true);
+      }
+    }
     if (response) {
       setShow(true);
-  
+
       setDetails({
-        type:"",
-    amount:"",
-    beneficiaryAccountNo:"",
-    userAccountNo:"",
-    transactionPassword:""
+        type: "",
+        amount: "",
+        beneficiaryAccountNo: "",
+        userAccountNo: "",
+        transactionPassword: "",
       });
     }
   };
@@ -56,6 +79,7 @@ const FundTransfer = () => {
   return (
     <>
       <FundTransferModal show={show} handleClose={handleClose} />
+      <ActivateNetBankingModal show={netShow} handleClose={handleNetClose} />
       <MDBContainer
         fluid
         className="d-flex align-items-center justify-content-center "
@@ -69,7 +93,7 @@ const FundTransfer = () => {
               Fund Transfer
             </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-            <select
+              <select
                 required
                 className="form-select"
                 aria-label="Default select example"
@@ -86,7 +110,7 @@ const FundTransfer = () => {
               </select>
               <br></br>
 
-            <MDBInput
+              <MDBInput
                 {...register("amount", { required: true })}
                 wrapperClass="mb-4"
                 label="Amount"
@@ -130,9 +154,8 @@ const FundTransfer = () => {
               {errors.userAccountNo?.type === "required" && (
                 <p role="alert">To Account number is required</p>
               )}
-              
 
-               <MDBInput
+              <MDBInput
                 wrapperClass="mb-4"
                 label="Transaction Password"
                 size="lg"
@@ -151,12 +174,9 @@ const FundTransfer = () => {
               )}
               {errors.transactionPassword?.type === "pattern" && (
                 <>
-                  <p role="alert">
-                    Invalid password
-        
-                  </p>
+                  <p role="alert">Invalid password</p>
                 </>
-              )} 
+              )}
 
               <MDBBtn
                 className="mb-4 w-100 gradient-custom-3"

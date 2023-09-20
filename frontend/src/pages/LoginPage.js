@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "../assets/images/login.png";
-import { login } from "../utils/apiHelper";
+import { login, getCurrentUser } from "../utils/apiHelper";
 import { useNavigate } from "react-router-dom";
+import { GetUserContext } from "../context/UserContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setUser } = GetUserContext();
 
   const [details, setDetails] = useState({
     email: "",
@@ -18,7 +20,6 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setDetails({ ...details, [name]: value });
   };
-  
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -31,7 +32,8 @@ const LoginPage = () => {
         email: "",
         password: "",
       });
-      localStorage.setItem("token", response.accessToken);
+      const user = await getCurrentUser();
+      setUser(user.data);
       navigate("/user");
     }
     setIsLoading(false);

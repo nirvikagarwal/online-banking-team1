@@ -17,6 +17,7 @@ import FundTransfer from "../pages/FundTransfer";
 import AddBeneficiary from "../pages/AddBeneficiary";
 import ManageBeneficiary from "../pages/ManageBeneficiary";
 import Transactions from "../pages/Transactions";
+import ActivateNetBankingPage from "../pages/ActivateNetBankingPage";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
         path: "/transactions",
         element: <Transactions />,
       },
+      {
+        path : "/activateNetBanking",
+        element : <ActivateNetBankingPage/>
+      }
     ],
   },
 ]);
