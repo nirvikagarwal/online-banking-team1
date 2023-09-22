@@ -18,4 +18,5 @@ public class AccountDetailsResponseDto {
     private boolean isActive;
     private LocalDate dateOfOpening;
     private boolean netBankingEnabled;
+    private String user;
 }
