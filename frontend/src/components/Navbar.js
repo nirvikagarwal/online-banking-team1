@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink ,useNavigate} from "react-router-dom";
 import Logo from "../assets/images/bank-logo.png";
+import {GetUserContext} from '../context/UserContext';
 import "./Navbar.css";
 
 const navLinkStyle = {
@@ -12,6 +13,17 @@ const navLinkStyle = {
 };
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+  const {user,setUser} = GetUserContext();
+
+
+  const handleClick = () =>{
+    localStorage.removeItem('token');
+    setUser({isLoggedIn : false});
+    navigate('/');
+    
+  }
   return (
     <nav className="navbar navbar-expand-lg navb">
       <div className="logo">
@@ -43,16 +55,18 @@ const Navbar = () => {
               Register
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/login"
-              activeClassName="active"
-            >
-              Login
-            </NavLink>
-          </li>
+         {
+           !user.isLoggedIn &&  <li className="nav-item">
+           <NavLink
+             style={navLinkStyle}
+             className="nav-link hov"
+             to="/login"
+             activeClassName="active"
+           >
+             Login
+           </NavLink>
+         </li>
+         }
           {/* <li className="nav-item">
             <NavLink
               style={navLinkStyle}
@@ -83,7 +97,8 @@ const Navbar = () => {
               Net Banking
             </NavLink>
           </li>
-          <li className="nav-item">
+          {
+            user.isLoggedIn && <li className="nav-item">
             <NavLink
               style={navLinkStyle}
               className="nav-link hov"
@@ -93,6 +108,17 @@ const Navbar = () => {
               Activate Net Banking
             </NavLink>
           </li>
+          }
+          {user.isLoggedIn && <li className="nav-item">
+            <button
+              className="btn btn-outline-light btn-sm"
+              style={navLinkStyle}
+              type="button"
+              onClick={handleClick}
+            >
+            Logout
+            </button>
+          </li>}
         </ul>
         <form className="d-flex">
           <input

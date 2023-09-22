@@ -33,7 +33,7 @@ const LoginPage = () => {
         password: "",
       });
       const user = await getCurrentUser();
-      setUser(user.data);
+      setUser({...user.data,isLoggedIn:true});
       navigate("/user");
     }
     setIsLoading(false);

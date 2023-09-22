@@ -139,6 +139,25 @@ const activateNetBanking = async (details) => {
   }
 };
 
+const getTransactions = async(accountNo) =>{
+  console.log(accountNo)
+  try{
+
+    const response = axios.get(`http://localhost:8080/api/transactions/account/${accountNo}`,
+    {
+      headers : {
+        Authorization : `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+    ) 
+
+    console.log(response);
+    return response.data;
+  }catch(err){
+    console.log(err);
+  }
+}
+
 export {
   registorUser,
   getUsers,
@@ -149,4 +168,5 @@ export {
   getCurrentUser,
   getAccount,
   activateNetBanking,
+  getTransactions
 };
