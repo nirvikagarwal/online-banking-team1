@@ -55,13 +55,14 @@ public class UserController {
     @GetMapping(path = "/{userId}/accounts")
     public ResponseEntity<Object> getAccountsOfUser(@PathVariable int userId, Principal principal) {
         User user = UserExtract.getLoggedInUser(principal);
-        if (!user.isAdmin() || user.getUserId() != userId)
+        if (!user.isAdmin() && user.getUserId() != userId)
             return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
         List<Account> accounts = accountService.getAccountsByUserId(userId);
         List<AccountDetailsResponseDto> accountDetailsResponseDtoList = accounts.stream()
                 .map(account -> {
                     AccountDetailsResponseDto dto = new AccountDetailsResponseDto();
                     BeanUtils.copyProperties(account, dto);
+                    dto.setUser(account.getUser().getFirstName());
                     return dto;
                 }).collect(Collectors.toList());
         return ResponseEntity.ok(accountDetailsResponseDtoList);
@@ -89,7 +90,7 @@ public class UserController {
     @PutMapping(path = "/{userId}")
     public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody User userDetails, Principal principal) {
         User user = UserExtract.getLoggedInUser(principal);
-        if (!user.isAdmin() || user.getUserId() != userId)
+        if (!user.isAdmin() && user.getUserId() != userId)
             return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
         User updatedUser = userService.updateUser(userId, userDetails);
         return ResponseEntity.ok(updatedUser);
