@@ -16,6 +16,8 @@ public class UserDetailsResponseDto {
     private String lastName;
     private String email;
     private LocalDate dob;
+    private String mobile;
     private String pan;
     private String address;
+    private boolean isAdmin;
 }

@@ -67,4 +67,10 @@ public class AccountServiceImpl implements AccountService{
         account.setTransactionPassword(PasswordEncoder.generate(netBankingDto.getTransactionPassword()));
         accountRepository.save(account);
     }
+
+    @Override
+    public Account toggleAccountStatus(Account account) {
+        account.setActive(!account.isActive());
+        return accountRepository.save(account);
+    }
 }

@@ -3,6 +3,7 @@ package com.team1.bankApplication.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,6 +57,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @NotNull
+    private boolean isAdmin = false;
+
     @Override
     public String toString() {
         return "User{" +
@@ -70,6 +74,7 @@ public class User {
                 ", pan='" + pan + '\'' +
                 ", address='" + address + '\'' +
                 ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }
