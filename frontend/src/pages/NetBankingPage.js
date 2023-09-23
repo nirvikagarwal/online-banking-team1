@@ -43,7 +43,7 @@ const NetBankingPage = () => {
               <p className="card-text text-reset">
                 View and manage your beneficiaries.
               </p>
-              <Link to="manageBeneficiary" className="btn btn-outline-light">
+              <Link to="/manageBeneficiary" className="btn btn-outline-light">
                 Go to Manage Beneficiary
               </Link>
             </div>
