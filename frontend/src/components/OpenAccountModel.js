@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const OpenAccountModal = ({ show, handleClose }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/user");
+    navigate("/activateNetBanking");
   };
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -18,7 +18,7 @@ const OpenAccountModal = ({ show, handleClose }) => {
           Close
         </Button>
         <Button variant="primary" onClick={handleClick}>
-          Explore More
+          Activate Net Banking
         </Button>
       </Modal.Footer>
     </Modal>
