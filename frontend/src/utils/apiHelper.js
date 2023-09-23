@@ -158,6 +158,25 @@ const getTransactions = async (accountNo) => {
   }
 };
 
+const toggleUser = async (accountNo) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/accounts/${accountNo}/toggle`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
 export {
   registorUser,
   getUsers,
@@ -169,4 +188,5 @@ export {
   getAccount,
   activateNetBanking,
   getTransactions,
+  toggleUser,
 };
