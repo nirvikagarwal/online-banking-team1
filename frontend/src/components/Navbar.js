@@ -148,7 +148,7 @@ const NavbarComponent = () => {
           <button className="btn btn-outline-primary but" type="submit">
             Search
           </button>
-        </form>
+        </form> */}
       </div>
     </nav>
   );
