@@ -1,33 +1,55 @@
 import "./HomePage.css";
 import "bootstrap";
-import hand from "../assets/images/hand.png";
+import "../assets/images/online-banking-image.png";
 
 const HomePage = () => {
   return (
     <>
       <div className="bg">
-        {/* <h1 className="display-1 txt">Welcome to Premier Private Bank</h1>
-        <h4 className="subtxt">
-          At Premier Private Bank, we are committed to empowering individuals
-          and businesses with financial solutions that drive growth and
-          prosperity in our communities.
-        </h4>
-        <h1 className="feat">Featured Services :</h1>
-        <h5 className="featcls">
-          <img src={hand} alt="#" />
-          Explore our range of products and services, designed to meet your
-          unique financial needs.
-        </h5>
-        <h5 className="featcls">
-          <img src={hand} alt="#" />
-          Simplify your banking with our mobile app for convenient on-the-go
-          access to your accounts.
-        </h5>
-        <h5 className="featcls">
-          <img src={hand} alt="#" />
-          Experience seamless and secure online transactions with our internet
-          banking platform.
-        </h5> */}
+        <br></br>
+        <br></br>
+        <br></br>
+        <h3
+          style={{
+            marginLeft: "80px",
+            textAlign: "left",
+            width: "600px",
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: "bold",
+            fontStretch: "expanded",
+            color: "purple",
+            fontSize: "32px",
+          }}
+        >
+          At CashSwift, we are committed to empowering individuals and
+          businesses with financial solutions that drive growth and prosperity
+          in our communities.
+        </h3>
+        <br></br>
+        <ul
+          style={{
+            marginLeft: "70px",
+            textAlign: "left",
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: "bold",
+            fontStretch: "expanded",
+            color: "purple",
+            width: "600px",
+          }}
+        >
+          <li className="list-class">
+            Explore our range of products and services, designed to meet your
+            unique financial needs.
+          </li>
+          <li className="list-class">
+            Simplify your banking with our mobile app for convenient on-the-go
+            access to your accounts.
+          </li>
+          <li className="list-class">
+            Experience seamless and secure online transactions with our internet
+            banking platform.
+          </li>
+        </ul>
       </div>
     </>
   );

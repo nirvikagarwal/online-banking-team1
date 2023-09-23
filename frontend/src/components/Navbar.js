@@ -5,12 +5,23 @@ import { Image, Navbar } from "react-bootstrap";
 import "./Navbar.css";
 
 const navLinkStyle = {
-  color: "black", // Change link color
-  // backgroundColor: "black",
+  color: "purple", // Change link color
   textDecoration: "none !important", // Remove underline
   padding: "10px 20px", // Add padding
-  borderRadius: "5px", // Add rounded corners
+  borderRadius: "7px", // Add rounded corners
   transition: "background-color 0.2s ease",
+  fontSize: "15px",
+  fontFamily: "system-ui",
+  fontWeight: "600",
+};
+
+const bankNameStyle = {
+  color: "#1079c9",
+  fontSize: "25px", // Adjust the font size as needed
+  fontWeight: "bold",
+  marginLeft: "10px", // Add some spacing between the logo and bank name
+  marginRight: "10px",
+  fontFamily: "'Croissant One', cursive",
 };
 
 const NavbarComponent = () => {
@@ -23,9 +34,19 @@ const NavbarComponent = () => {
     navigate("/");
   };
   return (
-    <nav className="navbar navbar-expand-lg navb">
-      <div className="logo">
+    <nav className="navbar navbar-expand-lg navb" style={{ height: "8vh" }}>
+      <div className="logo d-flex align-items-center">
         <img src={Logo} alt="#" />
+
+        <NavLink
+          style={bankNameStyle}
+          className="nav-link hov"
+          aria-current="page"
+          to="/"
+          activeClassName="active"
+        >
+          CashSwift
+        </NavLink>
       </div>
       <button
         className="navbar-toggler"
@@ -40,7 +61,7 @@ const NavbarComponent = () => {
       </button>
       <div className="container-fluid" style={{ textDecoration: "none" }}>
         <ul
-          className="nav nav-tabs navbar-nav me-auto mb-2 mb-lg-0"
+          className="nav nav-tabs navbar-nav mb-2 mb-lg-0 custom-class ms-auto"
           style={{ textDecoration: "none" }}
         >
           <li className="nav-item hov">
@@ -106,30 +127,16 @@ const NavbarComponent = () => {
               Net Banking
             </NavLink>
           </li>
-          {user.isLoggedIn && (
-            <li className="nav-item">
-              <NavLink
-                style={navLinkStyle}
-                className="nav-link hov"
-                to="/activateNetBanking"
-                activeClassName="active"
-              >
-                Activate Net Banking
-              </NavLink>
-            </li>
-          )}
-          {user.isLoggedIn && (
-            <li className="nav-item">
-              <button
-                className="btn btn-outline-light btn-sm"
-                style={navLinkStyle}
-                type="button"
-                onClick={handleClick}
-              >
-                Logout
-              </button>
-            </li>
-          )}
+          <li className="nav-item">
+            <NavLink
+              style={navLinkStyle}
+              className="nav-link hov"
+              to="/activateNetBanking"
+              activeClassName="active"
+            >
+              Activate Net Banking
+            </NavLink>
+          </li>
         </ul>
         {/* <form className="d-flex">
           <input
@@ -141,16 +148,7 @@ const NavbarComponent = () => {
           <button className="btn btn-outline-primary but" type="submit">
             Search
           </button>
-        </form> */}
-        {user.isLoggedIn && (
-          <Image
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-            roundedCircle
-            className="float-end"
-            style={{ width: "40px", height: "40px" }}
-            alt="Avatar"
-          />
-        )}
+        </form>
       </div>
     </nav>
   );

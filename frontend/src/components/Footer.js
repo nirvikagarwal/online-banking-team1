@@ -44,20 +44,27 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
+const linkStyle = { textDecoration: "none", color: "purple" };
 const Footer = () => {
   return (
     <footer
-      className="footer mt-5 py-3 "
-      style={{ backgroundColor: "#A1B7F3", paddingTop: "2rem" }}
+      className="footer"
+      style={{
+        backgroundColor: "#A1B7F3",
+        paddingTop: "2rem",
+        paddingBottom: "1rem",
+        color: "purple",
+        fontSize: "17px",
+      }}
     >
       <Container>
-        <Row>
+        <Row style={{ paddingLeft: "10rem" }}>
           <Col md={4}>
             <h5>Contact Us</h5>
             <div>
-              Customer Support: 1-800-123-4567
+              Customer Support:+1 (800) 123-4567
               <br />
-              Email: support@bank.com
+              Email: support@cashswift.com
               <br />
               Address: Hyderabad, India
             </div>
@@ -66,47 +73,32 @@ const Footer = () => {
             <h5>Quick Links</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="/" style={{ textDecoration: "none", color: "black" }}>
+                <a href="/" style={linkStyle}>
                   Home
                 </a>
               </li>
               <li>
-                <a
-                  href="/accounts"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/accounts" style={linkStyle}>
                   Accounts
                 </a>
               </li>
               <li>
-                <a
-                  href="/transfers"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/transfers" style={linkStyle}>
                   Transfers
                 </a>
               </li>
               <li>
-                <a
-                  href="/payments"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/payments" style={linkStyle}>
                   Payments
                 </a>
               </li>
               <li>
-                <a
-                  href="/statements"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/statements" style={linkStyle}>
                   Statements
                 </a>
               </li>
               <li>
-                <a
-                  href="/security"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/security" style={linkStyle}>
                   Security and Privacy
                 </a>
               </li>
@@ -116,34 +108,22 @@ const Footer = () => {
             <h5>Legal</h5>
             <ul className="list-unstyled">
               <li>
-                <a
-                  href="/terms"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/terms" style={linkStyle}>
                   Terms and Conditions
                 </a>
               </li>
               <li>
-                <a
-                  href="/privacy"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/privacy" style={linkStyle}>
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a
-                  href="/cookie"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/cookie" style={linkStyle}>
                   Cookie Policy
                 </a>
               </li>
               <li>
-                <a
-                  href="/compliance"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <a href="/compliance" style={linkStyle}>
                   Compliance
                 </a>
               </li>
@@ -152,7 +132,15 @@ const Footer = () => {
         </Row>
         <Row>
           <Col>
-            <div className="text-center text-muted">
+            <div
+              className="text-center"
+              style={{
+                color: "black",
+                paddingRight: "4rem",
+                paddingLeft: "0rem",
+                textAlign: "center",
+              }}
+            >
               &copy; {new Date().getFullYear()} All rights reserved.
             </div>
           </Col>
