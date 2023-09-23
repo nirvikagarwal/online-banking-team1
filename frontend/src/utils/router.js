@@ -75,7 +75,7 @@ const router = createBrowserRouter([
         element: <ManageBeneficiary />,
       },
       {
-        path: "/transactions",
+        path: "/transactions/:userId",
         element: <Transactions />,
       },
       {

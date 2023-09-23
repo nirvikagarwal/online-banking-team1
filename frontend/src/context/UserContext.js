@@ -4,14 +4,14 @@ import { getCurrentUser, getAccount } from "../utils/apiHelper";
 const UserContext = React.createContext(null);
 
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({isLoggedIn:false});
 
   useEffect(() => {
     const func = async () => {
       const token = localStorage.getItem("token");
       if (token) {
         const user = await getCurrentUser();
-        setUser(user.data);
+        setUser({...user.data,isLoggedIn:true});
       }
     };
     func();

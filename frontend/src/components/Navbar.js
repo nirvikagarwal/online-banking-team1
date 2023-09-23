@@ -1,5 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/bank-logo.png";
+import { GetUserContext } from "../context/UserContext";
+import { Image, Navbar } from "react-bootstrap";
 import "./Navbar.css";
 
 const navLinkStyle = {
@@ -22,7 +24,15 @@ const bankNameStyle = {
   fontFamily: "'Croissant One', cursive",
 };
 
-const Navbar = () => {
+const NavbarComponent = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = GetUserContext();
+
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    setUser({ isLoggedIn: false });
+    navigate("/");
+  };
   return (
     <nav className="navbar navbar-expand-lg navb" style={{ height: "8vh" }}>
       <div className="logo d-flex align-items-center">
@@ -38,6 +48,17 @@ const Navbar = () => {
           CashSwift
         </NavLink>
       </div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div className="container-fluid" style={{ textDecoration: "none" }}>
         <ul
           className="nav nav-tabs navbar-nav mb-2 mb-lg-0 custom-class ms-auto"
@@ -64,16 +85,18 @@ const Navbar = () => {
               Register
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/login"
-              activeClassName="active"
-            >
-              Login
-            </NavLink>
-          </li>
+          {!user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className="nav-link hov"
+                to="/login"
+                activeClassName="active"
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
           {/* <li className="nav-item">
             <NavLink
               style={navLinkStyle}
@@ -114,16 +137,6 @@ const Navbar = () => {
               Activate Net Banking
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/user"
-              activeClassName="active"
-            >
-              User
-            </NavLink>
-          </li>
         </ul>
         {/* <form className="d-flex">
           <input
@@ -135,10 +148,10 @@ const Navbar = () => {
           <button className="btn btn-outline-primary but" type="submit">
             Search
           </button>
-        </form> */}
+        </form>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default NavbarComponent;
