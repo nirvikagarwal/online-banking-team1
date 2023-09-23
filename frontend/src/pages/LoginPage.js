@@ -33,8 +33,8 @@ const LoginPage = () => {
         password: "",
       });
       const user = await getCurrentUser();
-      setUser({...user.data,isLoggedIn:true});
-      navigate("/user");
+      setUser({ ...user.data, isLoggedIn: true });
+      user.data.admin ? navigate("/admin") : navigate("/user");
     }
     setIsLoading(false);
   };
