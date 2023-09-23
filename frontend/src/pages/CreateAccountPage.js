@@ -32,9 +32,6 @@ const CreateAccount = () => {
   const handleSubmit = async (e) => {
     console.log(details);
     e.preventDefault();
-    // if (details.occupation.length !== 12) {
-    //   alert("occupation number should contain 12 digits. Please enter again!");
-    // }
     const response = await openAccount(details);
     if (response) {
       setDetails({

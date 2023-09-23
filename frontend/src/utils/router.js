@@ -18,6 +18,7 @@ import AddBeneficiary from "../pages/AddBeneficiary";
 import ManageBeneficiary from "../pages/ManageBeneficiary";
 import Transactions from "../pages/Transactions";
 import ActivateNetBankingPage from "../pages/ActivateNetBankingPage";
+import AdminDashboard from "../pages/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +33,6 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
-      },
-
-      {
-        path: "/admin",
-        element: <AdminPage />,
       },
       {
         path: "/user",
@@ -83,9 +79,13 @@ const router = createBrowserRouter([
         element: <Transactions />,
       },
       {
-        path : "/activateNetBanking",
-        element : <ActivateNetBankingPage/>
-      }
+        path: "/activateNetBanking",
+        element: <ActivateNetBankingPage />,
+      },
+      {
+        path: "/admin",
+        element: <AdminDashboard />,
+      },
     ],
   },
 ]);

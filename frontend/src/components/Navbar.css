@@ -9,8 +9,13 @@
 
 .nav-tabs {
   font-size: 13px;
+  border-bottom: none;
 }
-.nav-item {
+
+/* .custom-class {
+  margin-left: auto;
+} */
+.nav-item ul {
   text-decoration: none;
 }
 /* Logo styles */

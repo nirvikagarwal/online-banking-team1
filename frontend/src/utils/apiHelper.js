@@ -27,6 +27,25 @@ const getUsers = async () => {
   }
 };
 
+const toggleUser = async (accountNo) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/accounts/${accountNo}/toggle`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const data = response.data;
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
 const openAccount = async (account) => {
   try {
     const response = await axios.post(
@@ -121,6 +140,19 @@ const getAccount = async (userId) => {
   }
 };
 
+const getAccounts = async (userId) => {
+  try {
+    const account = await axios.get(`http://localhost:8080/api/accounts`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return account.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const activateNetBanking = async (details) => {
   try {
     const response = await axios.post(
@@ -149,4 +181,6 @@ export {
   getCurrentUser,
   getAccount,
   activateNetBanking,
+  toggleUser,
+  getAccounts,
 };

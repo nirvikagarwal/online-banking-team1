@@ -34,7 +34,7 @@ const LoginPage = () => {
       });
       const user = await getCurrentUser();
       setUser(user.data);
-      navigate("/user");
+      user.data.admin ? navigate("/admin") : navigate("/user");
     }
     setIsLoading(false);
   };

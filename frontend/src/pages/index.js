@@ -1,5 +1,5 @@
 import HomePage from "./HomePage";
-import AdminPage from "./AdminPage";
+import AdminDashboard from "./AdminDashboard";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ForgotUserIdPage from "./ForgotUserIdPage";
 import LoginPage from "./LoginPage";
@@ -12,7 +12,7 @@ import CreatAccountPage from "./CreateAccountPage";
 
 export {
   HomePage,
-  AdminPage,
+  AdminDashboard,
   ForgotPasswordPage,
   ForgotUserIdPage,
   LoginPage,
