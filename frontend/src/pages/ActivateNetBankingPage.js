@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "./ActivateNetBanking.css"; // Create a CSS file for custom styles
-import { GetUserContext } from "../context/UserContext";
-import {
-  getCurrentUser,
-  getAccount,
-  activateNetBanking,
-} from "../utils/apiHelper";
+import { activateNetBanking } from "../utils/apiHelper";
+import { useLoaderData } from "react-router-dom";
 
 function ActivateNetBanking() {
+  const { accounts } = useLoaderData();
   const [transactionPassword, setTransactionPassword] = useState("");
   const [accountNo, setAccountNo] = useState();
   const [message, setMessage] = useState("");
@@ -54,15 +51,24 @@ function ActivateNetBanking() {
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="accountNo" className="mt-2">
-                  <Form.Label>Fill Account Number</Form.Label>
+                <Form.Group controlId="selectAccount">
+                  <Form.Label>Select Account Number:</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter account number"
+                    as="select"
                     value={accountNo}
-                    onChange={(e) => setAccountNo(e.target.value)}
-                    required
-                  />
+                    onChange={(e) => {
+                      setAccountNo(e.target.value);
+                    }}
+                  >
+                    <option value="">Select an Account</option>
+                    {accounts.map((account, index) => {
+                      return (
+                        <option key={index} value={account.accountNo}>
+                          {account.accountNo}
+                        </option>
+                      );
+                    })}
+                  </Form.Control>
                 </Form.Group>
                 <Button variant="secondary" type="submit" className="mt-4">
                   Activate Net Banking
