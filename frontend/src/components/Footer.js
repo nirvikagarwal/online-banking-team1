@@ -48,7 +48,7 @@ const linkStyle = { textDecoration: "none", color: "purple" };
 const Footer = () => {
   return (
     <footer
-      className="footer"
+      className="footer "
       style={{
         backgroundColor: "#A1B7F3",
         paddingTop: "2rem",
@@ -57,7 +57,7 @@ const Footer = () => {
         fontSize: "17px",
       }}
     >
-      <Container>
+      <Container fluid>
         <Row style={{ paddingLeft: "10rem" }}>
           <Col md={4}>
             <h5>Contact Us</h5>

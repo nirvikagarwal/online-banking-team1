@@ -61,7 +61,7 @@ const NavbarComponent = () => {
       </button>
       <div className="container-fluid" style={{ textDecoration: "none" }}>
         <ul
-          className="nav nav-tabs navbar-nav mb-2 mb-lg-0 custom-class ms-auto"
+          className="nav nav-tabs navbar-nav mb-2 mb-lg-0 ms-auto"
           style={{ textDecoration: "none" }}
         >
           <li className="nav-item hov">
@@ -75,16 +75,18 @@ const NavbarComponent = () => {
               Home
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/userRegistration"
-              activeClassName="active"
-            >
-              Register
-            </NavLink>
-          </li>
+          {!user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className="nav-link hov"
+                to="/userRegistration"
+                activeClassName="active"
+              >
+                Register
+              </NavLink>
+            </li>
+          )}
           {!user.isLoggedIn && (
             <li className="nav-item">
               <NavLink
@@ -97,16 +99,6 @@ const NavbarComponent = () => {
               </NavLink>
             </li>
           )}
-          {/* <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/userTable"
-              activeClassName="active"
-            >
-              user table
-            </NavLink>
-          </li> */}
           <li className="nav-item">
             <NavLink
               style={navLinkStyle}
@@ -137,6 +129,20 @@ const NavbarComponent = () => {
               Activate Net Banking
             </NavLink>
           </li>
+          {user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className={`nav-link hov ${
+                  user.isLoggedIn ? "logout-active" : ""
+                }`}
+                onClick={handleClick}
+                activeClassName="active"
+              >
+                Logout
+              </NavLink>
+            </li>
+          )}
         </ul>
         {/* <form className="d-flex">
           <input
