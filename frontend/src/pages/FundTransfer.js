@@ -77,8 +77,16 @@ const FundTransfer = () => {
 
   return (
     <>
-      <FundTransferModal show={show} handleClose={handleClose} />
-      <ActivateNetBankingModal show={netShow} handleClose={handleNetClose} />
+      <FundTransferModal
+        show={show}
+        handleClose={handleClose}
+        userId={user.userId}
+      />
+      <ActivateNetBankingModal
+        show={netShow}
+        handleClose={handleNetClose}
+        userId={user.userId}
+      />
       <MDBContainer
         fluid
         className="d-flex align-items-center justify-content-center "

@@ -2,10 +2,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-const FundTransferModal = ({ show, handleClose }) => {
+const FundTransferModal = ({ show, handleClose, userId }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/transactions");
+    navigate(`/transactions/${userId}`);
   };
   return (
     <Modal show={show} onHide={handleClose} centered>

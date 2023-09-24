@@ -131,7 +131,7 @@ const NavbarComponent = () => {
             <NavLink
               style={navLinkStyle}
               className="nav-link hov"
-              to="/activateNetBanking"
+              to={`/activateNetBanking/${user.userId}`}
               activeClassName="active"
             >
               Activate Net Banking

@@ -9,8 +9,10 @@ import {
 } from "mdb-react-ui-kit";
 import { openAccount } from "../utils/apiHelper";
 import OpenAccountModal from "../components/OpenAccountModel";
+import { GetUserContext } from "../context/UserContext";
 
 const CreateAccount = () => {
+  const { user } = GetUserContext();
   const [details, setDetails] = useState({
     accountType: "",
     branch: "",
@@ -45,7 +47,11 @@ const CreateAccount = () => {
   };
   return (
     <>
-      <OpenAccountModal show={show} handleClose={handleClose} />
+      <OpenAccountModal
+        show={show}
+        handleClose={handleClose}
+        userId={user.userId}
+      />
       <MDBContainer
         fluid
         className="d-flex align-items-center justify-content-center "

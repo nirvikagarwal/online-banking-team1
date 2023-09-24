@@ -7,7 +7,7 @@ import { GetUserContext } from "../context/UserContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { setUser } = GetUserContext();
+  const { setUser, user } = GetUserContext();
 
   const [details, setDetails] = useState({
     email: "",
@@ -32,9 +32,9 @@ const LoginPage = () => {
         email: "",
         password: "",
       });
-      const user = await getCurrentUser();
-      setUser(user.data);
-      navigate("/user");
+      const tmp = await getCurrentUser();
+      setUser(tmp.data);
+      navigate(`/user/${tmp.data.userId}`);
     }
     setIsLoading(false);
   };
