@@ -1,6 +1,6 @@
 import "./IntersectionObserver";
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen} from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AddBeneficiary from "../pages/AddBeneficiary";
 import { addBeneficiary } from "../utils/apiHelper";
@@ -28,19 +28,27 @@ describe("AddBeneficiary", () => {
     );
 
     // ... simulate form input changes
+    fireEvent.change(screen.getByRole('textbox', {
+      name: /beneficiary name/i
+    }), { target: { value: "John Doe" } });
 
-    fireEvent.change(getByLabelText("Beneficiary Name"), { target: { value: "John Doe" } });
-    fireEvent.change(getByLabelText("Account Number"), { target: { value: "123456789" } });
+    fireEvent.change(screen.getByRole('textbox', {
+      name: /account number/i
+    }), { target: { value: "123456789" } });
+
+    fireEvent.change(screen.getByRole('textbox', {
+      name: /bank name/i
+    }), {target: {value: "Bank"}});
+
+    fireEvent.change(screen.getByRole('textbox', {
+      name: /ifsc code/i
+    }), {target: {value: "BARB0VJMNRE" }});
 
     // Simulate form submission
-    fireEvent.click(getByText("ADD"));
+    await fireEvent.click(screen.getByRole('button', {
+      name: /add/i
+    }));
 
-    // Ensure the addBeneficiary function is called
-    // expect(addBeneficiary).toHaveBeenCalledWith({
-    //   "accountNo": "123456789",
-    //   "bankName": "", // Set other values if applicable
-    //   "beneficiaryName": "John Doe",
-    //   "ifsc": "",     // Set other values if applicable
-    // });
+    expect(addBeneficiary).toHaveBeenCalled();
   });
 });
