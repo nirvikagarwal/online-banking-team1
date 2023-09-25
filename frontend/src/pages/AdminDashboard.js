@@ -181,7 +181,7 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <table className="table table-striped-columns border border-secondary tab-cls table-dark table-hover">
+        <table className="table table-striped-columns border tab-cls table-light table-hover">
           <thead>
             <tr>
               {/* <th scope="col">#</th>

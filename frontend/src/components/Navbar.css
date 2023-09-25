@@ -12,9 +12,17 @@
   border-bottom: none;
 }
 
+.nav-link.hov.logout-active {
+  /* Your custom styles for the active state */
+  background-color: transparent; /* You can adjust this style as needed */
+  color: purple; /* Change the color to match your button style */
+  border-color: #a1b7f3;
+}
+
 /* .custom-class {
-  margin-left: auto;
+  background-color: #a1b7f3;
 } */
+
 .nav-item ul {
   text-decoration: none;
 }
