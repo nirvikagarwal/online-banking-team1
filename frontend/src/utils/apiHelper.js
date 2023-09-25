@@ -190,6 +190,20 @@ const getTransactions = async (accountNo) => {
   }
 };
 
+const resetPassword = async (details) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/users/resetPassword",
+      details
+    );
+    console.log(response.data);
+    return response;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
 export {
   registorUser,
   getUsers,
@@ -203,4 +217,5 @@ export {
   getAccounts,
   toggleUser,
   getTransactions,
+  resetPassword,
 };
