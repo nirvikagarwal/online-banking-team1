@@ -1,6 +1,7 @@
 package com.team1.bankApplication.controllers;
 
 import com.team1.bankApplication.dtos.AccountDetailsResponseDto;
+import com.team1.bankApplication.dtos.PasswordResetDto;
 import com.team1.bankApplication.dtos.UserDetailsResponseDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
@@ -102,5 +103,10 @@ public class UserController {
             return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
         userService.deleteUser(userId);
         return ResponseEntity.ok("User Deleted Successfully");
+    }
+
+    @PostMapping(path = "/resetPassword")
+    public ResponseEntity<Object> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
+        return userService.handleResetPassword(passwordResetDto);
     }
 }
