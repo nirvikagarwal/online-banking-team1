@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import { getCurrentUser, getAccount } from "./apiHelper";
 import {
   HomePage,
-  AdminPage,
   ForgotPasswordPage,
   ForgotUserIdPage,
   LoginPage,
@@ -12,12 +12,12 @@ import {
   Root,
   CreatAccountPage,
 } from "../pages";
-import UserTable from "../pages/Table";
 import FundTransfer from "../pages/FundTransfer";
 import AddBeneficiary from "../pages/AddBeneficiary";
 import ManageBeneficiary from "../pages/ManageBeneficiary";
 import Transactions from "../pages/Transactions";
 import ActivateNetBankingPage from "../pages/ActivateNetBankingPage";
+import AdminDashboard from "../pages/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -33,14 +33,14 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage />,
       },
-
       {
-        path: "/admin",
-        element: <AdminPage />,
-      },
-      {
-        path: "/user",
+        path: "/user/:userId",
         element: <UserDashboard />,
+        loader: async ({ params }) => {
+          const user = await getCurrentUser(params.userId);
+          const accounts = await getAccount(params.userId);
+          return { user: user.data, accounts };
+        },
       },
       {
         path: "/forgotPassword",
@@ -62,10 +62,7 @@ const router = createBrowserRouter([
         path: "/createAccount",
         element: <CreatAccountPage />,
       },
-      {
-        path: "/userTable",
-        element: <UserTable />,
-      },
+
       {
         path: "/fundTransfer",
         element: <FundTransfer />,
@@ -79,13 +76,21 @@ const router = createBrowserRouter([
         element: <ManageBeneficiary />,
       },
       {
-        path: "/transactions",
+        path: "/transactions/:userId",
         element: <Transactions />,
       },
       {
-        path : "/activateNetBanking",
-        element : <ActivateNetBankingPage/>
-      }
+        path: "/activateNetBanking/:userId",
+        element: <ActivateNetBankingPage />,
+        loader: async ({ params }) => {
+          const accounts = await getAccount(params.userId);
+          return { accounts };
+        },
+      },
+      {
+        path: "/admin",
+        element: <AdminDashboard />,
+      },
     ],
   },
 ]);

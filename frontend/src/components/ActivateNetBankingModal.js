@@ -2,10 +2,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-const ActivateNetBankingModal = ({ show, handleClose }) => {
+const ActivateNetBankingModal = ({ show, handleClose, userId }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/activateNetBanking");
+    navigate(`/activateNetBanking/${userId}`);
   };
   return (
     <Modal show={show} onHide={handleClose} centered>

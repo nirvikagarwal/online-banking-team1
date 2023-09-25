@@ -1,5 +1,7 @@
 package com.team1.bankApplication.controllers;
 
+import com.team1.bankApplication.dtos.AccountDetailsResponseDto;
+import com.team1.bankApplication.dtos.PasswordResetDto;
 import com.team1.bankApplication.dtos.UserDetailsResponseDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.team1.bankApplication.utils.UserExtract.isAdmin;
 
 @RestController
 @RequestMapping("/api/users")
@@ -34,18 +39,44 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<Object> getUsers(Principal principal) {
+        if (!isAdmin(principal)) {
+            return new ResponseEntity<>("User is not ADMIN", HttpStatus.NOT_FOUND);
+        }
+        List<User> users = userService.getUsers();
+        List<UserDetailsResponseDto> responseDtoList = users.stream()
+                .map(user -> {
+                    UserDetailsResponseDto dto = new UserDetailsResponseDto();
+                    BeanUtils.copyProperties(user, dto);
+                    return dto;
+                }).collect(Collectors.toList());
+        return ResponseEntity.ok(responseDtoList);
     }
 
     @GetMapping(path = "/{userId}/accounts")
-    public List<Account> getAccountsOfUser(@PathVariable int userId) {
-        return accountService.getAccountsByUserId(userId);
+    public ResponseEntity<Object> getAccountsOfUser(@PathVariable int userId, Principal principal) {
+        User user = UserExtract.getLoggedInUser(principal);
+        if (!user.isAdmin() && user.getUserId() != userId)
+            return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
+        List<Account> accounts = accountService.getAccountsByUserId(userId);
+        List<AccountDetailsResponseDto> accountDetailsResponseDtoList = accounts.stream()
+                .map(account -> {
+                    AccountDetailsResponseDto dto = new AccountDetailsResponseDto();
+                    BeanUtils.copyProperties(account, dto);
+                    dto.setUser(account.getUser().getFirstName());
+                    return dto;
+                }).collect(Collectors.toList());
+        return ResponseEntity.ok(accountDetailsResponseDtoList);
     }
 
     @GetMapping(path = "/{userId}")
-    public User getUser(@PathVariable int userId) {
-        return userService.getUserByUserId(userId);
+    public ResponseEntity<Object> getUser(@PathVariable int userId, Principal principal) {
+        if (!isAdmin(principal))
+            return new ResponseEntity<>("Invalid User Id", HttpStatus.NOT_FOUND);
+        User user = userService.getUserByUserId(userId);
+        UserDetailsResponseDto dto = new UserDetailsResponseDto();
+        BeanUtils.copyProperties(user,dto);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping(path = "/getDetails")
@@ -58,12 +89,24 @@ public class UserController {
     }
 
     @PutMapping(path = "/{userId}")
-    public User updateUser(@PathVariable int userId, @RequestBody User userDetails) {
-        return userService.updateUser(userId, userDetails);
+    public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody User userDetails, Principal principal) {
+        User user = UserExtract.getLoggedInUser(principal);
+        if (!user.isAdmin() && user.getUserId() != userId)
+            return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
+        User updatedUser = userService.updateUser(userId, userDetails);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping(path = "/{userId}")
-    public void deleteUser(@PathVariable int userId) {
+    public ResponseEntity<Object> deleteUser(@PathVariable int userId, Principal principal) {
+        if (!isAdmin(principal))
+            return new ResponseEntity<>("User is Not ADMIN", HttpStatus.NOT_FOUND);
         userService.deleteUser(userId);
+        return ResponseEntity.ok("User Deleted Successfully");
+    }
+
+    @PostMapping(path = "/resetPassword")
+    public ResponseEntity<Object> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
+        return userService.handleResetPassword(passwordResetDto);
     }
 }

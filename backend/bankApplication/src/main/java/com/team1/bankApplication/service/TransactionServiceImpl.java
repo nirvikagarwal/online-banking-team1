@@ -50,11 +50,11 @@ public class TransactionServiceImpl implements TransactionService {
         if (!userAccount.isNetBankingEnabled())
             return new ResponseEntity<>("Net Banking is not enabled", HttpStatus.BAD_REQUEST);
         Account beneficiary = accountService.getAccount(transactionDto.getBeneficiaryAccountNo());
-        if (beneficiary == null || beneficiary.getUser().getUserId() != user.getUserId())
-            return new ResponseEntity<>("Beneficiary does not exist", HttpStatus.BAD_REQUEST);
+//        if (beneficiary == null || beneficiary.getUser().getUserId() != user.getUserId())
+//            return new ResponseEntity<>("Beneficiary does not exist", HttpStatus.BAD_REQUEST);
         if (transactionDto.getAmount() <= 0)
             return new ResponseEntity<>("Amount should be greater then 0", HttpStatus.BAD_REQUEST);
-        if (transactionDto.getType().equals("debit") && transactionDto.getAmount() > userAccount.getBalance())
+        if (transactionDto.getAmount() > userAccount.getBalance())
             return new ResponseEntity<>("Insufficient Funds", HttpStatus.BAD_REQUEST);
         boolean isMatch = new BCryptPasswordEncoder().matches(transactionDto.getTransactionPassword(), userAccount.getTransactionPassword());
         if (!isMatch) return new ResponseEntity<>("Incorrect Transaction Password", HttpStatus.BAD_REQUEST);

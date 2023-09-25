@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./netBankingPage.css";
+import { GetUserContext } from "../context/UserContext";
 
 const NetBankingPage = () => {
+  const { user } = GetUserContext();
   return (
     <div className="container-fluid">
       <div className="row">
@@ -43,7 +45,7 @@ const NetBankingPage = () => {
               <p className="card-text text-reset">
                 View and manage your beneficiaries.
               </p>
-              <Link to="manageBeneficiary" className="btn btn-outline-light">
+              <Link to="/manageBeneficiary" className="btn btn-outline-light">
                 Go to Manage Beneficiary
               </Link>
             </div>
@@ -57,7 +59,10 @@ const NetBankingPage = () => {
             <div className="card-body">
               <h5 className="card-title">Transactions</h5>
               <p className="card-text text-reset">View transactions history</p>
-              <Link to="/transactions" className="btn btn-outline-light">
+              <Link
+                to={`/transactions/${user.userId}`}
+                className="btn btn-outline-light"
+              >
                 Go to transactions
               </Link>
             </div>

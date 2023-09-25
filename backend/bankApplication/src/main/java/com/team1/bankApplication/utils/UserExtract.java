@@ -9,4 +9,8 @@ public class UserExtract {
     public static User getLoggedInUser(Principal principal) {
         return  (User)((Authentication) principal).getPrincipal();
     }
+
+    public static boolean isAdmin(Principal principal) {
+        return getLoggedInUser(principal).isAdmin();
+    }
 }

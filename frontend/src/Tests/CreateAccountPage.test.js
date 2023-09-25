@@ -3,10 +3,13 @@ import React from 'react';
 import { render, screen, fireEvent, getByRole } from '@testing-library/react';
 import { BrowserRouter as Router } from "react-router-dom";
 import CreateAccount from '../pages/CreateAccountPage';
+import { GetUserContext } from "../context/UserContext";
 
+jest.mock('../context/UserContext', () => ({
+  GetUserContext: () => ({ user: { isLoggedIn: false }, setUser: jest.fn() }),
+}));
 
 jest.mock("../utils/apiHelper", () => ({
-    
     openAccount: jest.fn(),
   }));
   

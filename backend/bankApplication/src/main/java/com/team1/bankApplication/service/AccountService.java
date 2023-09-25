@@ -14,6 +14,7 @@ public interface AccountService {
 
     List<Account> getAccounts();
     List<Account> getAccountsByUserId(int userId);
+    Account toggleAccountStatus(Account account);
 
     void registerNetBanking(Account account, NetBankingDto netBankingDto);
 }

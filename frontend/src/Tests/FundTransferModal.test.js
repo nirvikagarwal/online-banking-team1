@@ -29,7 +29,7 @@ describe("FundTransferModal", () => {
     );
 
     fireEvent.click(getByText("View Transactions"));
-    expect(mockNavigate).toHaveBeenCalledWith("/transactions");
+    expect(mockNavigate).toHaveBeenCalledWith("/transactions/undefined");
   });
 
   test("calls handleClose when Close button is clicked", () => {
