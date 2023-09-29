@@ -8,13 +8,13 @@ jest.mock('../utils/apiHelper', () => ({
 }));
 
 jest.mock('react-hook-form', () => ({
-  useForm: jest.fn(() => ({
+  useForm: () => ({
     register: jest.fn(),
     handleSubmit: jest.fn(),
     formState: {
       errors: {},
-    },
-  })),
+    }
+  }),
 }));
 
 jest.mock('../components/FundTransferModal', () => ({

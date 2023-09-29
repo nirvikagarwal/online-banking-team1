@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import { getTransactions, getAccount } from "../utils/apiHelper";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 //import "./TransactionsPage.css"; // Create a CSS file for custom styles
 
 function TransactionsPage() {
@@ -9,6 +11,7 @@ function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const { userId } = useParams();
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const func = async (userId) => {
@@ -31,7 +34,21 @@ function TransactionsPage() {
     }
   }, [selectedAccount]);
 
-  const handleDownloadPDF = () => {};
+  const handleDownloadPDF = () => {
+    const capture = document.querySelector("#transactions");
+    setLoader(true);
+    html2canvas(capture).then((canvas) => {
+      const imgData = canvas.toDataURL("img/png");
+      const doc = new jsPDF("l", "mm", "a4");
+      const componentWidth = doc.internal.pageSize.getWidth() - 1;
+      let componentHeight = doc.internal.pageSize.getHeight();
+      componentHeight -= componentHeight / 1.4;
+      console.log(componentWidth + 1, componentHeight + 160);
+      doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
+      setLoader(false);
+      doc.save("transactions.pdf");
+    });
+  };
 
   return (
     <Container>
@@ -58,18 +75,28 @@ function TransactionsPage() {
                 })}
               </Form.Control>
             </Form.Group>
-            <Button
-              variant="primary"
-              onClick={handleDownloadPDF}
-              className="mt-4"
-            >
-              Download PDF
-            </Button>
+            {loader ? (
+              <button className="btn btn-primary mt-4" type="button" disabled>
+                <span
+                  className="spinner-grow spinner-grow-sm me-2"
+                  aria-hidden="true"
+                ></span>
+                <span role="status">Downloading PDF </span>
+              </button>
+            ) : (
+              <Button
+                variant="primary"
+                onClick={handleDownloadPDF}
+                className="mt-4"
+              >
+                Download PDF
+              </Button>
+            )}
           </Form>
         </Col>
       </Row>
 
-      <Row className="mt-4">
+      <Row className="mt-4" id="transactions">
         <Col>
           <Table striped bordered hover>
             <thead>
