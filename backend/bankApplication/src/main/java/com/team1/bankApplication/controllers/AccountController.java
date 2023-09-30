@@ -5,6 +5,7 @@ import com.team1.bankApplication.dtos.AccountDto;
 import com.team1.bankApplication.dtos.NetBankingDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.exceptions.AccountNotFoundException;
 import com.team1.bankApplication.service.AccountService;
 import com.team1.bankApplication.utils.UserExtract;
 import jakarta.validation.Valid;
@@ -34,13 +35,13 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNo}")
-    public ResponseEntity<Object> getAccount(@PathVariable long accountNo, Principal principal) {
+    public ResponseEntity<Object> getAccount(@PathVariable long accountNo, Principal principal)
+            throws AccountNotFoundException {
         Account account = accountService.getAccount(accountNo);
-        if (account == null)
-            return new ResponseEntity<>("Invalid Account Number", HttpStatus.NOT_FOUND);
+
         User user = UserExtract.getLoggedInUser(principal);
         if (!user.isAdmin() && account.getUser().getUserId() != user.getUserId())
-            return new ResponseEntity<>("User is not ADMIN", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("User is not ADMIN", HttpStatus.BAD_REQUEST);
         AccountDetailsResponseDto responseDto = new AccountDetailsResponseDto();
         BeanUtils.copyProperties(account, responseDto);
         responseDto.setUser(account.getUser().getFirstName());
@@ -56,12 +57,10 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerNetBanking(@Valid @RequestBody NetBankingDto netBankingDto, Principal principal) {
+    public ResponseEntity<String> registerNetBanking(@Valid @RequestBody NetBankingDto netBankingDto, Principal principal)
+            throws AccountNotFoundException {
         User user = UserExtract.getLoggedInUser(principal);
         Account account = accountService.getAccount(netBankingDto.getAccountNo());
-        if (account == null) {
-            return new ResponseEntity<>("Invalid Account Number", HttpStatus.BAD_REQUEST);
-        }
 
         if (account.getUser().getUserId() != user.getUserId()) {
             return new ResponseEntity<>("Account does not Exist", HttpStatus.BAD_REQUEST);
@@ -73,12 +72,12 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNo}/toggle")
-    private ResponseEntity<Object> toggleStatus(@PathVariable long accountNo, Principal principal) {
+    private ResponseEntity<Object> toggleStatus(@PathVariable long accountNo, Principal principal)
+            throws AccountNotFoundException {
         if(!UserExtract.isAdmin(principal))
             return new ResponseEntity<>("User is Not Admin", HttpStatus.BAD_REQUEST);
         Account account = accountService.getAccount(accountNo);
-        if (account == null)
-            return new ResponseEntity<>("Invalid Account Number", HttpStatus.NOT_FOUND);
+
         accountService.toggleAccountStatus(account);
         return ResponseEntity.ok("Account status changed");
     }

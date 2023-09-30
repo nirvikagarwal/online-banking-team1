@@ -5,6 +5,7 @@ import com.team1.bankApplication.dtos.AccountDto;
 import com.team1.bankApplication.dtos.NetBankingDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.exceptions.AccountNotFoundException;
 import com.team1.bankApplication.repositories.AccountRepository;
 import com.team1.bankApplication.repositories.UserRepository;
 import com.team1.bankApplication.utils.PasswordEncoder;
@@ -44,8 +45,9 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account getAccount(long accountNo) {
-        Account account = accountRepository.findByAccountNo(accountNo);
+    public Account getAccount(long accountNo) throws AccountNotFoundException{
+        Account account = accountRepository.findByAccountNo(accountNo)
+                .orElseThrow(() -> new AccountNotFoundException());
         return account;
     }
 

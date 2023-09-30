@@ -17,7 +17,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto)  {
         String token=authService.login(loginDto);
 
         if (token != null) {

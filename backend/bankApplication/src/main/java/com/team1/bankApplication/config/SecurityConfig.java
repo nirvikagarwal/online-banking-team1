@@ -1,5 +1,6 @@
 package com.team1.bankApplication.config;
 
+import com.team1.bankApplication.security.JwtAuthenticationEntryPoint;
 import com.team1.bankApplication.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 @Configuration
 public class SecurityConfig {
     @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
+    private JwtAuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
     private JwtAuthenticationFilter authenticationFilter;
 
