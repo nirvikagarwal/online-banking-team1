@@ -157,15 +157,7 @@ const ForgotPassword = () => {
               )}
               {errors.newPassword?.type === "pattern" && (
                 <>
-                  <p role="alert">
-                    invalid password
-                    <ul className="list-unstyled">
-                      <li className="">An item</li>
-                      <li className="">A second item</li>
-                      <li className="">A third item</li>
-                      <li className="">A fourth item</li>
-                    </ul>
-                  </p>
+                  <p role="alert">Invalid password</p>
                 </>
               )}
 
@@ -175,7 +167,7 @@ const ForgotPassword = () => {
                 type="submit"
                 // data-bs-toggle="modal" data-bs-target="#exampleModal"
               >
-                ADD
+                RESET
               </MDBBtn>
             </form>
           </MDBCardBody>

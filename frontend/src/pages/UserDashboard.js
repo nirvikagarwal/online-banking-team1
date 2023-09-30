@@ -1,5 +1,6 @@
 import "./userDashboard.css";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const UserDashboard = () => {
   const { user, accounts } = useLoaderData();
@@ -22,18 +23,18 @@ const UserDashboard = () => {
           <div className="position-sticky">
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a className="nav-link active" href="#account-details">
-                  Account Statement
+                <a className="nav-link active" href="#user-details">
+                  User Details
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#account-summary">
-                  Apply for loan
+                <a className="nav-link" href="#account-details">
+                  Account details
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#transaction-history">
-                  Credit/Debit Card
+                  Transaction history
                 </a>
               </li>
               <li className="nav-item">
@@ -49,7 +50,7 @@ const UserDashboard = () => {
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div className="card mt-4 shadow">
             <div className="card-body">
-              <h5 className="card-title">User Info</h5>
+              <h5 className="card-title">User Details</h5>
               <p className="card-text">
                 {" "}
                 Name: {user.firstName} {user.middleName} {user.lastName}
