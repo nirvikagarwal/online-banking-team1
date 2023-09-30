@@ -2,6 +2,7 @@ package com.team1.bankApplication.service;
 
 import com.team1.bankApplication.dtos.PasswordResetDto;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.exceptions.UserNotFoundException;
 import com.team1.bankApplication.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,7 +32,7 @@ public class UserServiceImplTest {
 
     @BeforeEach
     public void init() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
@@ -81,7 +83,7 @@ public class UserServiceImplTest {
         User user = new User();
         user.setUserId(1);
 
-        when(userRepository.findByUserId(1)).thenReturn(user);
+        when(userRepository.findByUserId(1)).thenReturn(Optional.of(user));
 
         User retrievedUser = userService.getUserByUserId(1);
         assertEquals(1, retrievedUser.getUserId());
@@ -91,7 +93,7 @@ public class UserServiceImplTest {
     public void testGetUserByEmail() {
         User user = new User();
         user.setEmail("test@gmail.com");
-        when(userRepository.findOneByEmail("test@gmail.com")).thenReturn(user);
+        when(userRepository.findOneByEmail("test@gmail.com")).thenReturn(Optional.of(user));
 
         User retrievedUser = userService.getUserByEmail("test@gmail.com");
         assertEquals("test@gmail.com", retrievedUser.getEmail());
@@ -105,7 +107,7 @@ public class UserServiceImplTest {
         User userDetails = new User();
         userDetails.setFirstName("UpdatedFirstName");
 
-        when(userRepository.findByUserId(1)).thenReturn(user);
+        when(userRepository.findByUserId(1)).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
 
         User updatedUser = userService.updateUser(1, userDetails);
@@ -117,7 +119,7 @@ public class UserServiceImplTest {
         User user = new User();
         user.setUserId(1);
 
-        when(userRepository.findByUserId(1)).thenReturn(user);
+        when(userRepository.findByUserId(1)).thenReturn(Optional.of(user));
 
         userService.deleteUser(1);
     }
@@ -145,7 +147,7 @@ public class UserServiceImplTest {
         user.setMobile("1234567890");
         user.setDob(LocalDate.of(2000, 1, 1));
 
-        when(userRepository.findOneByEmail("test@example.com")).thenReturn(user);
+        when(userRepository.findOneByEmail("test@example.com")).thenReturn(Optional.of(user));
 
         ResponseEntity<Object> responseEntity = userService.handleResetPassword(passwordResetDto);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -162,11 +164,13 @@ public class UserServiceImplTest {
         passwordResetDto.setNewPassword("newPassword");
 
         // No user with the provided email
-        when(userRepository.findOneByEmail("test@example.com")).thenReturn(null);
-
-        ResponseEntity<Object> responseEntity = userService.handleResetPassword(passwordResetDto);
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
-        assertEquals("User doesn't exist", responseEntity.getBody());
+        when(userRepository.findOneByEmail("test@example.com")).thenReturn(Optional.empty());
+        try {
+            ResponseEntity<Object> responseEntity = userService.handleResetPassword(passwordResetDto);
+        } catch (UserNotFoundException e) {
+            assertEquals(HttpStatus.NOT_FOUND, e.getStatus());
+            assertEquals("Invalid User ID", e.getMessage());
+        }
     }
 
     @Test
@@ -181,7 +185,7 @@ public class UserServiceImplTest {
         user.setEmail("test@example.com");
         user.setMobile("9876543210"); // Different mobile number
 
-        when(userRepository.findOneByEmail("test@example.com")).thenReturn(user);
+        when(userRepository.findOneByEmail("test@example.com")).thenReturn(Optional.of(user));
 
         ResponseEntity<Object> responseEntity = userService.handleResetPassword(passwordResetDto);
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());

@@ -65,7 +65,6 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException ex) {
             throw new BankAppException(HttpStatus.BAD_REQUEST, "Token Claims String is empty");
         }
-
     }
 
 }

@@ -21,6 +21,10 @@ public class BankAppException extends RuntimeException {
         // TODO Auto-generated constructor stub
     }
 
+    public BankAppException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public BankAppException(HttpStatus status, String message) {
         this.status = status;
         this.message = message;

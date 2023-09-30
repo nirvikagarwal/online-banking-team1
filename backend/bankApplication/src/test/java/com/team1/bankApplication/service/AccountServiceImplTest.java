@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,20 +39,16 @@ public class AccountServiceImplTest {
 
     @Test
     public void testAddAccount() {
-        // Create a User for testing
         User user = createUser();
 
-        // Create an AccountDto
         AccountDto accountDto = new AccountDto();
         accountDto.setAccountType("Savings");
         accountDto.setBranch("Main Branch");
         accountDto.setOccupation("Engineer");
         accountDto.setAnnualIncome(100000L);
 
-        // Mock the accountRepository to return a saved account
         when(accountRepository.save(any(Account.class))).thenReturn(createAccount(user));
 
-        // Call the addAccount method
         Account newAccount = accountService.addAccount(accountDto, user);
 
         // Assertions
@@ -71,13 +68,10 @@ public class AccountServiceImplTest {
     public void testGetAccount() {
         long accountNo = 12345L;
 
-        // Mock the accountRepository to return an account with the specified accountNo
-        when(accountRepository.findByAccountNo(accountNo)).thenReturn(createAccount(null));
+        when(accountRepository.findByAccountNo(accountNo)).thenReturn(Optional.of(createAccount(null)));
 
-        // Call the getAccount method
         Account account = accountService.getAccount(accountNo);
 
-        // Assertions
         assertNotNull(account);
         assertEquals(accountNo, account.getAccountNo());
     }
@@ -88,13 +82,10 @@ public class AccountServiceImplTest {
         accountList.add(createAccount(null));
         accountList.add(createAccount(null));
 
-        // Mock the accountRepository to return a list of accounts
         when(accountRepository.findAll()).thenReturn(accountList);
 
-        // Call the getAccounts method
         List<Account> accounts = accountService.getAccounts();
 
-        // Assertions
         assertEquals(2, accounts.size());
     }
 
@@ -102,35 +93,27 @@ public class AccountServiceImplTest {
     public void testGetAccountsByUserId() {
         int userId = 1;
 
-        // Create a list of accounts associated with the user
         List<Account> userAccounts = new ArrayList<>();
         userAccounts.add(createAccount(null));
         userAccounts.add(createAccount(null));
 
-        // Mock the userRepository to return a user
         when(userRepository.findById(userId)).thenReturn(java.util.Optional.of(createUser()));
 
-        // Mock the accountRepository to return a list of accounts associated with the user
         when(accountRepository.findByUserUserId(userId)).thenReturn(userAccounts);
 
-        // Call the getAccountsByUserId method
         List<Account> accounts = accountService.getAccountsByUserId(userId);
 
-        // Assertions
         assertEquals(2, accounts.size());
     }
 
     @Test
     public void testRegisterNetBanking() {
-        // Create an account with net banking disabled
         Account account = createAccount(null);
         assertFalse(account.isNetBankingEnabled());
 
-        // Create a NetBankingDto
         NetBankingDto netBankingDto = new NetBankingDto();
         netBankingDto.setTransactionPassword("newPassword");
 
-        // Call the registerNetBanking method
         accountService.registerNetBanking(account, netBankingDto);
 
         // Assertions
@@ -140,7 +123,6 @@ public class AccountServiceImplTest {
 
     @Test
     public void testToggleAccountStatus() {
-        // Create an account with active status
         Account account = createAccount(null);
         assertTrue(account.isActive());
 
@@ -157,7 +139,6 @@ public class AccountServiceImplTest {
     private User createUser() {
         User user = new User();
         user.setUserId(1);
-        // Set other user properties as needed for testing
         return user;
     }
 

@@ -5,6 +5,7 @@ import com.team1.bankApplication.dtos.PasswordResetDto;
 import com.team1.bankApplication.dtos.UserDetailsResponseDto;
 import com.team1.bankApplication.entities.Account;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.exceptions.UserNotFoundException;
 import com.team1.bankApplication.service.AccountService;
 import com.team1.bankApplication.service.UserService;
 import com.team1.bankApplication.utils.PasswordEncoder;
@@ -70,7 +71,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<Object> getUser(@PathVariable int userId, Principal principal) {
+    public ResponseEntity<Object> getUser(@PathVariable int userId, Principal principal) throws UserNotFoundException {
         if (!isAdmin(principal))
             return new ResponseEntity<>("Invalid User Id", HttpStatus.NOT_FOUND);
         User user = userService.getUserByUserId(userId);

@@ -2,6 +2,7 @@ package com.team1.bankApplication.service;
 
 import com.team1.bankApplication.dtos.PasswordResetDto;
 import com.team1.bankApplication.entities.User;
+import com.team1.bankApplication.exceptions.UserNotFoundException;
 import com.team1.bankApplication.repositories.UserRepository;
 import com.team1.bankApplication.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         user.setPassword(PasswordEncoder.generate(user.getPassword()));
-        User newUser = userRepository.save(user);
-        return newUser;
+        return userRepository.save(user);
     }
 
     @Override
@@ -30,13 +30,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUserId(int userId) {
-        return userRepository.findByUserId(userId);
+    public User getUserByUserId(int userId) throws UserNotFoundException {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UserNotFoundException());
     }
 
     @Override
-    public User updateUser(int userId, User userDetails) {
-        User user = userRepository.findByUserId(userId);
+    public User updateUser(int userId, User userDetails) throws UserNotFoundException {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(UserNotFoundException::new);
         user.setFirstName(userDetails.getFirstName());
         user.setMiddleName(userDetails.getMiddleName());
         user.setLastName(userDetails.getLastName());
@@ -47,20 +49,20 @@ public class UserServiceImpl implements UserService {
         user.setAddress(userDetails.getAddress());
         user.setPan(userDetails.getPan());
 
-        User updatedUser = userRepository.save(user);
-        return updatedUser;
+        return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(int userId) {
-        User user = userRepository.findByUserId(userId);
+    public void deleteUser(int userId) throws UserNotFoundException {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UserNotFoundException());
         userRepository.delete(user);
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        User user = userRepository.findOneByEmail(email);
-        return user;
+    public User getUserByEmail(String email) throws UserNotFoundException {
+        return userRepository.findOneByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException());
     }
 
     @Override
@@ -70,10 +72,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<Object> handleResetPassword(PasswordResetDto passwordResetDto) {
-        User user = userRepository.findOneByEmail(passwordResetDto.getEmail());
-        if (user == null)
-            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> handleResetPassword(PasswordResetDto passwordResetDto) throws UserNotFoundException {
+        User user = userRepository.findOneByEmail(passwordResetDto.getEmail())
+                .orElseThrow(() -> new UserNotFoundException());
         if (user.getMobile().equals(passwordResetDto.getMobile()) && user.getDob().equals(passwordResetDto.getDob())) {
             resetUserPassword(user, passwordResetDto.getNewPassword());
             return ResponseEntity.ok("Password reset successfully");
