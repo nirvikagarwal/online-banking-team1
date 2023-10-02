@@ -36,19 +36,19 @@ const AddBeneficiary = () => {
   };
 
   const onSubmit = async (e) => {
-    // console.log(details);
+    console.log(details);
     // e.preventDefault();
-    // const response = await addBeneficiary(details);
-    // console.log(response);
-    // if (response) {
-    //   setShow(true);
-    //   setDetails({
-    //     beneficiaryName: "",
-    //     accountNo: "",
-    //     bankName: "",
-    //     ifsc: "",
-    //   });
-    // }
+    const response = await addBeneficiary(details);
+    console.log(response);
+    if (response) {
+      setShow(true);
+      setDetails({
+        beneficiaryName: "",
+        accountNo: "",
+        bankName: "",
+        ifsc: "",
+      });
+    }
   };
 
   return (

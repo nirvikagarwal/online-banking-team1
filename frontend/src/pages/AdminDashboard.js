@@ -71,7 +71,7 @@ const AdminDashboard = () => {
     // setUsers(newUsers);
 
     const newAccounts = originalAccounts.filter((account) =>
-      account.user.startsWith(searchTerm)
+      account.user.toLowerCase().startsWith(searchTerm)
     );
     setAccounts(newAccounts);
   };
@@ -135,7 +135,7 @@ const AdminDashboard = () => {
       {clickedUser && clickedUser.length > 0 && (
         <AdminModal show={show} handleClose={handleClose} user={clickedUser} />
       )}
-      <div className="container" style={{ minHeight: "80vh" }}>
+      <div className="container" style={{ minHeight: "100vh" }}>
         <br></br>
         <div className="d-flex justify-content-between align-items-center mb-3">
           <div class="input-group rounded" style={{ width: "30%" }}>
