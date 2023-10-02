@@ -99,36 +99,42 @@ const NavbarComponent = () => {
               </NavLink>
             </li>
           )}
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/createAccount"
-              activeClassName="active"
-            >
-              Open Account
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to="/netBanking"
-              activeClassName="active"
-            >
-              Net Banking
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              style={navLinkStyle}
-              className="nav-link hov"
-              to={`/activateNetBanking/${user.userId}`}
-              activeClassName="active"
-            >
-              Activate Net Banking
-            </NavLink>
-          </li>
+          {user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className="nav-link hov"
+                to="/createAccount"
+                activeClassName="active"
+              >
+                Open Account
+              </NavLink>
+            </li>
+          )}
+          {user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className="nav-link hov"
+                to="/netBanking"
+                activeClassName="active"
+              >
+                Net Banking
+              </NavLink>
+            </li>
+          )}
+          {user.isLoggedIn && (
+            <li className="nav-item">
+              <NavLink
+                style={navLinkStyle}
+                className="nav-link hov"
+                to={`/activateNetBanking/${user.userId}`}
+                activeClassName="active"
+              >
+                Activate Net Banking
+              </NavLink>
+            </li>
+          )}
           {user.isLoggedIn && (
             <li className="nav-item">
               <NavLink
