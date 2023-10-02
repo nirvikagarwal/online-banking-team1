@@ -20,7 +20,6 @@ describe('LoginPage component', () => {
       </Router>
     );
 
-    // Check that the component renders without crashing
     expect(screen.getByText('Welcome!')).toBeInTheDocument();
   });
 
@@ -34,8 +33,7 @@ describe('LoginPage component', () => {
     // Fill in the form fields
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
-
-    // Submit the form
+    
     fireEvent.click(screen.getByRole('button', {
       name: /submit/i}));
   });

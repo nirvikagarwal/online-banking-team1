@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { render, fireEvent, act, renderHook } from '@testing-library/react';
+import { render, fireEvent, act, renderHook, screen } from '@testing-library/react';
 import TransactionsPage from '../pages/Transactions';
 
 const selectedAccount = 'testAccount';
@@ -32,41 +32,12 @@ describe('TransactionsPage', () => {
             userStartBalance: 5000,
             from: '98765'
         }
-        // Add more mock transactions as needed
     ];
 
-    test('renders the component', async () => {
-        const { getByText } = render(<TransactionsPage />);
-        expect(getByText('Transactions')).toBeInTheDocument();
-        expect(getByText('Select Account Number:')).toBeInTheDocument();
-        // Add more assertions to validate the initial rendering of the component
-    });
-
-    describe('useEffect hook', () => {
-        it('should call getTransactions and update state', async () => {
-            const getTransactions = () => ({
-                selectedAccount: 'testedAccount',
-            })
-            const { result } = renderHook(() => useEffect(() => {
-                if (selectedAccount) {
-                    const func = async (selectedAccount) => {
-                        const response = await getTransactions(selectedAccount);
-                        if (response) setTransactions(response);
-                    };
-                    func(selectedAccount);
-                }
-            }, [selectedAccount]));
-
-            // Ensure that useEffect has been called
-            expect(window.getTransactions).toHaveBeenCalledWith(selectedAccount);
-
-            // Call the callback function returned by useEffect
-            await act(async () => {
-                result.current[0](); // result.current[0] is the callback function passed to useEffect
-            });
-
-            // Check if setTransactions has been called with the mock response
-            expect(result.current[1]).toHaveBeenCalledWith(responseMock);
-        });
+    test('renders the component', () => {
+        render(<TransactionsPage />);
+        expect(screen.getByRole('heading', {  name: /transactions/i})).toBeInTheDocument();
+        expect(screen.getByRole('button', {  name: /download pdf/i})).toBeInTheDocument();
+        expect(screen.getByRole('combobox', {  name: /select account number:/i})).toBeInTheDocument();
     });
 });

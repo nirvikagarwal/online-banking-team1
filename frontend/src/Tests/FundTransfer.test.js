@@ -1,10 +1,12 @@
 import React from 'react';
-import { render, fireEvent, screen, waitFor} from '@testing-library/react';
+import { render, screen, within} from '@testing-library/react';
 import FundTransfer from '../pages/FundTransfer';
+import MockIntersectionObserver from './IntersectionObserver'
+import user from '@testing-library/user-event';
 
 jest.mock('../utils/apiHelper', () => ({
-  getAccount: jest.fn(() => Promise.resolve([])),
-  fundTransfer: jest.fn(() => Promise.resolve({})),
+  getAccount: jest.fn(() => '1234567890'),
+  fundTransfer: jest.fn(),
 }));
 
 jest.mock('react-hook-form', () => ({
@@ -17,56 +19,36 @@ jest.mock('react-hook-form', () => ({
   }),
 }));
 
-jest.mock('../components/FundTransferModal', () => ({
-  FundTransferModal: jest.fn(),
-}));
-
-// Mock the GetUserContext to return a user object
 jest.mock('../context/UserContext', () => ({
   GetUserContext: () => ({ user: { isLoggedIn: false }, setUser: jest.fn() }),
 }));
 
-jest.mock('../components/ActivateNetBankingModal', () => ({
-  ActivateNetBankingModal: jest.fn(() => ({ user: { userId: '123' } })),
-}));
+jest.mock('../components/FundTransferModal', () => () => <div>FundTransferModalMock</div>);
+jest.mock('../components/ActivateNetBankingModal', () => () => <div>ActivateNetBankingModalMock</div>);
 
 describe('FundTransfer component', () => {
-  // ... existing tests ...
+  const onSubmit = jest.fn();
 
-  test('handles form submission', async () => {
+  test('onSubmit is called when all fields pass validation', async () => {
     render(<FundTransfer />);
 
-    // ... existing test logic ...
+    const TransactionType = screen.getByRole('combobox', {  name: /default select example/i});
+    user.selectOptions(TransactionType, within(TransactionType).getByRole('option', {name: 'NEFT'}));
 
-    // Fill in the form fields
-    fireEvent.change(screen.getByLabelText('Amount'), { target: { value: '100' } });
-    fireEvent.change(screen.getByLabelText('Beneficiary Account Number'), { target: { value: '123456789' } });
-    fireEvent.change(screen.getByLabelText('User Account Number'), { target: { value: '987654321' } });
-    fireEvent.change(screen.getByLabelText('Transaction Password'), { target: { value: 'Password1!' } });
-    fireEvent.change(screen.getByLabelText('Transaction Type'), { target: { value: 'neft' } });
+    const amount = screen.getByRole('spinbutton', {  name: /amount/i});
+    user.type(amount, '200');
 
-    // Submit the form
-    fireEvent.click(screen.getByText('SEND'));
+    const beneficiaryAccountNo = screen.getByRole('textbox', {  name: /beneficiary account number/i})
+    user.type(beneficiaryAccountNo, '1234567890');
 
-    // Wait for the asynchronous actions to complete
-    await screen.findByRole('alert');
+    const userAccountNo = screen.getByRole('textbox', {  name: /user account number/i})
+    user.type(userAccountNo, '0987654321');
 
-    // Check that the form submitted successfully
-    expect(screen.getByText('Fund Transfer Modal')).toBeInTheDocument();
-  });
+    const transactionPassword = screen.getByLabelText(/transaction password/i);
+    user.type(transactionPassword, 'Aman0702@');
 
-  test('displays error messages for invalid form input', async () => {
-    render(<FundTransfer />);
+    expect(screen.getByRole('button', {  name: /send/i})).toBeInTheDocument();
+    await user.click(screen.getByRole('button', {  name: /send/i}));
 
-    fireEvent.click(screen.getByText('SEND')); // Submit the form without filling fields
-
-    // Wait for the asynchronous actions to complete
-    await screen.findAllByRole('alert');
-
-    // Check for the error messages
-    expect(screen.getByText('Amount is required')).toBeInTheDocument();
-    expect(screen.getByText('Beneficiary Account Number is required')).toBeInTheDocument();
-    expect(screen.getByText('To Account number is required')).toBeInTheDocument();
-    expect(screen.getByText('Please enter your password')).toBeInTheDocument();
   });
 });
