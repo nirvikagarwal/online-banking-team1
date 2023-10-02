@@ -46,33 +46,33 @@ const FundTransfer = () => {
   };
 
   const onSubmit = async (e) => {
-    // console.log(details);
+    console.log(details);
     // e.preventDefault();
-    // const accounts = await getAccount(user.userId);
-    // console.log(accounts);
-    // const valid = accounts.find(
-    //   (account) => `${account.accountNo}` === details.userAccountNo
-    // );
-    // console.log(valid);
-    // let response = null;
-    // if (valid) {
-    //   if (valid.netBankingEnabled) {
-    //     response = await fundTransfer(details);
-    //     console.log(response);
-    //   } else {
-    //     setNetShow(true);
-    //   }
-    // }
-    // if (response) {
-    //   setShow(true);
-    //   setDetails({
-    //     type: "",
-    //     amount: "",
-    //     beneficiaryAccountNo: "",
-    //     userAccountNo: "",
-    //     transactionPassword: "",
-    //   });
-    // }
+    const accounts = await getAccount(user.userId);
+    console.log(accounts);
+    const valid = accounts.find(
+      (account) => `${account.accountNo}` === details.userAccountNo
+    );
+    console.log(valid);
+    let response = null;
+    if (valid) {
+      if (valid.netBankingEnabled) {
+        response = await fundTransfer(details);
+        console.log(response);
+      } else {
+        setNetShow(true);
+      }
+    }
+    if (response) {
+      setShow(true);
+      setDetails({
+        type: "",
+        amount: "",
+        beneficiaryAccountNo: "",
+        userAccountNo: "",
+        transactionPassword: "",
+      });
+    }
   };
 
   return (

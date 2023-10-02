@@ -36,19 +36,19 @@ const ForgotPassword = () => {
   };
 
   const onSubmit = async (e) => {
-    // console.log(details);
-    // // e.preventDefault();
-    // const response = await resetPassword(details);
-    // console.log(response);
-    // if (response) {
-    //   setShow(true);
-    //   setDetails({
-    //     email: "",
-    //     mobile: "",
-    //     dob: "",
-    //     newPassword: "",
-    //   });
-    // }
+    console.log(details);
+    // e.preventDefault();
+    const response = await resetPassword(details);
+    console.log(response);
+    if (response) {
+      setShow(true);
+      setDetails({
+        email: "",
+        mobile: "",
+        dob: "",
+        newPassword: "",
+      });
+    }
   };
 
   return (
