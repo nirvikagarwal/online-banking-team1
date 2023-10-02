@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import RegistrationModal from "./RegistrationModal.js";
+import RegistrationModal from "../components/RegistrationModal.js";
 
 // Mock react-router-dom's useNavigate hook
 jest.mock("react-router-dom", () => ({

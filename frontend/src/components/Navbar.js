@@ -157,7 +157,7 @@ const NavbarComponent = () => {
             placeholder="Search"
             aria-label="Search"
           />
-          <button className="btn btn-outline-primary but" type="submit">
+          <button className="btn btn-outline-success but" type="submit">
             Search
           </button>
         </form> */}

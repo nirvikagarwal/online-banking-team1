@@ -22,32 +22,32 @@ function TransactionsPage() {
     func(userId);
   }, []);
 
-  useEffect(() => {
-    if (selectedAccount) {
-      console.log(selectedAccount);
-      const func = async (selectedAccount) => {
-        const response = await getTransactions(selectedAccount);
-        if (response) setTransactions(response);
-        console.log(transactions);
-      };
-      func(selectedAccount);
-    }
-  }, [selectedAccount]);
+  // useEffect(() => {
+  //   if (selectedAccount) {
+  //     console.log(selectedAccount);
+  //     const func = async (selectedAccount) => {
+  //       const response = await getTransactions(selectedAccount);
+  //       if (response) setTransactions(response);
+  //       console.log(transactions);
+  //     };
+  //     func(selectedAccount);
+  //   }
+  // }, [selectedAccount]);
 
   const handleDownloadPDF = () => {
-    const capture = document.querySelector("#transactions");
-    setLoader(true);
-    html2canvas(capture).then((canvas) => {
-      const imgData = canvas.toDataURL("img/png");
-      const doc = new jsPDF("l", "mm", "a4");
-      const componentWidth = doc.internal.pageSize.getWidth() - 1;
-      let componentHeight = doc.internal.pageSize.getHeight();
-      componentHeight -= componentHeight / 1.4;
-      console.log(componentWidth + 1, componentHeight + 160);
-      doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
-      setLoader(false);
-      doc.save("transactions.pdf");
-    });
+    // const capture = document.querySelector("#transactions");
+    // setLoader(true);
+    // html2canvas(capture).then((canvas) => {
+    //   const imgData = canvas.toDataURL("img/png");
+    //   const doc = new jsPDF("l", "mm", "a4");
+    //   const componentWidth = doc.internal.pageSize.getWidth() - 1;
+    //   let componentHeight = doc.internal.pageSize.getHeight();
+    //   componentHeight -= componentHeight / 1.4;
+    //   console.log(componentWidth + 1, componentHeight + 160);
+    //   doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
+    //   setLoader(false);
+    //   doc.save("transactions.pdf");
+    // });
   };
 
   return (
@@ -111,7 +111,7 @@ function TransactionsPage() {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction) => {
+              {/* {transactions.map((transaction) => {
                 const date = new Date(transaction.timestamp);
                 const credit = transaction.to.toString() === selectedAccount;
                 const balance = credit
@@ -142,7 +142,7 @@ function TransactionsPage() {
                     </td>
                   </tr>
                 );
-              })}
+              })} */}
             </tbody>
           </Table>
         </Col>
